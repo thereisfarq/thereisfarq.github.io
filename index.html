@@ -28,6 +28,7 @@
       --bg: #9C2227;
       --white: #ffffff;
       --red: #9C2227;
+      --black: #000000;
       --stroke: rgba(255, 255, 255, 0.9);
 
       --radius: 24px;
@@ -75,24 +76,6 @@
       margin: 0 auto;
 
       display: grid;
-
-      /*
-        4 equal columns.
-
-        Layout:
-
-        ┌──────────────────────────────┐
-        │             LOGO             │
-        ├──────────────────────────────┤
-        │        GHULAAM CARD DECK     │
-        ├──────────────┬───────────────┤
-        │    BENTO     │     MORPH     │
-        ├──────────────┼───────────────┤
-        │   <COLOR>    │    TYPEDUP    │
-        ├──────────────────────────────┤
-        │             BLOG             │
-        └──────────────────────────────┘
-      */
 
       grid-template-columns:
         repeat(4, minmax(0, 1fr));
@@ -163,16 +146,14 @@
     }
 
     /* =========================================
-       DESKTOP HOVER
+       DESKTOP HOVER — PRODUCT TILES
        ========================================= */
 
     @media (hover: hover) and (pointer: fine) {
 
       .tile:not(.logo-tile):hover {
         color: var(--red);
-
-        border-color:
-          var(--white);
+        border-color: var(--white);
       }
 
       .tile:not(.logo-tile):hover::after {
@@ -181,31 +162,57 @@
 
       .tile:not(.logo-tile):hover .product-title {
         opacity: 0;
-
-        transform:
-          translateY(-8px);
+        transform: translateY(-8px);
       }
 
       .tile:not(.logo-tile):hover .product-copy {
         opacity: 1;
-
-        transform:
-          translateY(0);
+        transform: translateY(0);
       }
 
-      /* LOGO HOVER */
+      /* =====================================
+         FARQ STUDIO LOGO HOVER
+
+         Normal:
+         - White background
+         - Black logo
+
+         Hover:
+         - Black background
+         - Signature red logo
+         - White border
+         - White glow
+      ===================================== */
 
       .logo-tile:hover {
+        background: var(--black);
+
+        border-color:
+          var(--white);
+
         box-shadow:
-          0 12px 30px rgba(255, 255, 255, .12);
+          0 12px 34px rgba(255, 255, 255, 0.22),
+          0 0 22px rgba(255, 255, 255, 0.10);
+      }
+
+      .logo-tile:hover::after {
+        opacity: 0;
       }
 
       .logo-tile:hover img {
+        /*
+          Converts the supplied white SVG
+          into the signature #9C2227.
+        */
         filter:
-          invert(1)
-          drop-shadow(
-            0 5px 9px rgba(0, 0, 0, .2)
-          );
+          brightness(0)
+          saturate(100%)
+          invert(18%)
+          sepia(88%)
+          saturate(1918%)
+          hue-rotate(335deg)
+          brightness(88%)
+          contrast(98%);
       }
     }
 
@@ -225,9 +232,7 @@
 
       .tile:not(.logo-tile):focus-visible {
         color: var(--red);
-
-        border-color:
-          var(--white);
+        border-color: var(--white);
       }
 
       .tile:not(.logo-tile):focus-visible::after {
@@ -236,29 +241,35 @@
 
       .tile:not(.logo-tile):focus-visible .product-title {
         opacity: 0;
-
-        transform:
-          translateY(-8px);
+        transform: translateY(-8px);
       }
 
       .tile:not(.logo-tile):focus-visible .product-copy {
         opacity: 1;
-
-        transform:
-          translateY(0);
+        transform: translateY(0);
       }
 
       .logo-tile:focus-visible {
+        background: var(--black);
+
+        border-color:
+          var(--white);
+
         box-shadow:
-          0 12px 30px rgba(255, 255, 255, .12);
+          0 12px 34px rgba(255, 255, 255, 0.22),
+          0 0 22px rgba(255, 255, 255, 0.10);
       }
 
       .logo-tile:focus-visible img {
         filter:
-          invert(1)
-          drop-shadow(
-            0 5px 9px rgba(0, 0, 0, .2)
-          );
+          brightness(0)
+          saturate(100%)
+          invert(18%)
+          sepia(88%)
+          saturate(1918%)
+          hue-rotate(335deg)
+          brightness(88%)
+          contrast(98%);
       }
     }
 
@@ -287,6 +298,16 @@
 
       padding:
         clamp(32px, 5vw, 80px);
+
+      transition:
+        background-color var(--ease),
+        border-color var(--ease),
+        box-shadow var(--ease);
+    }
+
+    .logo-tile::after {
+      background:
+        var(--black);
     }
 
     .logo-tile img {
@@ -301,8 +322,8 @@
 
       /*
         Supplied SVG is white.
-        Invert to make it visible
-        on the white tile.
+        Invert it to black for
+        the normal white logo tile.
       */
 
       filter:
@@ -310,18 +331,6 @@
 
       transition:
         filter var(--ease);
-    }
-
-    /* =========================================
-       GHULAAM CARD DECK
-       ========================================= */
-
-    .ghulaam-tile {
-      grid-column:
-        1 / -1;
-
-      grid-row:
-        2;
     }
 
     /* =========================================
@@ -459,6 +468,18 @@
     }
 
     /* =========================================
+       GHULAAM CARD DECK
+       ========================================= */
+
+    .ghulaam-tile {
+      grid-column:
+        1 / -1;
+
+      grid-row:
+        2;
+    }
+
+    /* =========================================
        BLOG
        ========================================= */
 
@@ -490,14 +511,11 @@
           minmax(190px, auto)
           minmax(190px, auto)
           minmax(190px, auto)
-          minmax(190px, auto)
           minmax(190px, auto);
 
         min-height:
           auto;
       }
-
-      /* Logo */
 
       .logo-tile {
         grid-column:
@@ -510,8 +528,6 @@
           260px;
       }
 
-      /* Ghulaam — FULL WIDTH */
-
       .ghulaam-tile {
         grid-column:
           1 / -1;
@@ -522,8 +538,6 @@
         min-height:
           190px;
       }
-
-      /* Tools — 50 / 50 */
 
       .bento-tile {
         grid-column:
@@ -556,8 +570,6 @@
         grid-row:
           4;
       }
-
-      /* Blog — FULL WIDTH */
 
       .blog-tile {
         grid-column:
@@ -606,15 +618,8 @@
         grid-template-columns:
           repeat(2, minmax(0, 1fr));
 
-        /*
-          Explicit rows prevent
-          the browser from creating
-          unwanted empty space.
-        */
-
         grid-template-rows:
           220px
-          175px
           175px
           175px
           175px
@@ -648,6 +653,27 @@
       .logo-tile img {
         width:
           min(84%, 330px);
+      }
+
+      /*
+        Keep the logo's mobile tap state
+        clean rather than sticky.
+      */
+
+      .logo-tile:hover {
+        background:
+          var(--white);
+
+        border-color:
+          var(--white);
+
+        box-shadow:
+          none;
+      }
+
+      .logo-tile:hover img {
+        filter:
+          invert(1);
       }
 
       /* =====================================
@@ -825,18 +851,6 @@
         display:
           none;
       }
-
-      .logo-tile:hover,
-      .logo-tile:focus-visible {
-        box-shadow:
-          none;
-      }
-
-      .logo-tile:hover img,
-      .logo-tile:focus-visible img {
-        filter:
-          invert(1);
-      }
     }
 
     /* =========================================
@@ -915,7 +929,7 @@
   <main class="bento" aria-label="thereisfarq">
 
     <!-- =====================================
-         LOGO
+         FARQ STUDIO LOGO
          ===================================== -->
 
     <a
