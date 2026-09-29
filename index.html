@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <meta name="theme-color" content="#9C2227" />
   <title>thereisfarq</title>
-  <meta name="description" content="Small, entirely client-side tools by thereisfarq." />
+  <meta
+    name="description"
+    content="Small, entirely client-side tools by thereisfarq."
+  />
+
   <style>
     @font-face {
       font-family: "Bebas Neue";
@@ -18,17 +25,22 @@
     :root {
       --bg: #9C2227;
       --white: #ffffff;
-      --red: #b00000;
+      --red: #9C2227;
       --stroke: rgba(255, 255, 255, 0.9);
       --radius: 24px;
       --gap: 14px;
-      --ease: 220ms cubic-bezier(.2,.7,.2,1);
+      --ease: 220ms cubic-bezier(.2, .7, .2, 1);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html, body {
+    html,
+    body {
       margin: 0;
+      padding: 0;
+      width: 100%;
       min-height: 100%;
       background: var(--bg);
     }
@@ -38,38 +50,60 @@
       font-family: Arial, Helvetica, sans-serif;
       padding: clamp(14px, 2.2vw, 30px);
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       BENTO GRID
+    ========================= */
 
     .bento {
       width: min(1500px, 100%);
       margin: 0 auto;
+
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      grid-auto-rows: minmax(150px, 1fr);
+      grid-template-rows: repeat(2, minmax(240px, 1fr));
+
       gap: var(--gap);
-      min-height: calc(100vh - clamp(28px, 4.4vw, 60px));
+
+      min-height: calc(100dvh - clamp(28px, 4.4vw, 60px));
     }
+
+    /* =========================
+       ALL TILES
+    ========================= */
 
     .tile {
       position: relative;
       min-width: 0;
       min-height: 0;
+
       border: 1px solid var(--stroke);
       border-radius: var(--radius);
+
       overflow: hidden;
+      isolation: isolate;
+
       background: transparent;
+
       display: flex;
       align-items: flex-end;
+
       padding: clamp(18px, 2vw, 30px);
-      isolation: isolate;
+
+      color: var(--white);
+
       transition:
         background-color var(--ease),
         color var(--ease),
         border-color var(--ease),
-        box-shadow var(--ease),
-        transform var(--ease);
+        box-shadow var(--ease);
     }
 
     .tile::after {
@@ -77,226 +111,493 @@
       position: absolute;
       inset: 0;
       z-index: -1;
+
       background: var(--white);
+
       opacity: 0;
+
       transition: opacity var(--ease);
     }
 
-    .tile:not(.logo-tile):hover,
-    .tile:not(.logo-tile):focus-visible {
-      color: var(--red);
-      border-color: var(--white);
+    /* =========================
+       DESKTOP HOVER
+    ========================= */
+
+    @media (hover: hover) and (pointer: fine) {
+      .tile:not(.logo-tile):hover {
+        color: var(--red);
+        border-color: var(--white);
+      }
+
+      .tile:not(.logo-tile):hover::after {
+        opacity: 1;
+      }
+
+      .tile:not(.logo-tile):hover .product-title {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      .tile:not(.logo-tile):hover .product-copy {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .logo-tile:hover {
+        box-shadow: 0 12px 30px rgba(255, 255, 255, 0.12);
+      }
+
+      .logo-tile:hover img {
+        filter: invert(1) drop-shadow(0 5px 9px rgba(0, 0, 0, 0.2));
+      }
     }
 
-    .tile:not(.logo-tile):hover::after,
-    .tile:not(.logo-tile):focus-visible::after {
-      opacity: 1;
-    }
+    /* =========================
+       KEYBOARD FOCUS
+    ========================= */
 
     .tile:focus-visible {
       outline: 2px solid var(--white);
       outline-offset: 3px;
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      .tile:not(.logo-tile):focus-visible {
+        color: var(--red);
+        border-color: var(--white);
+      }
+
+      .tile:not(.logo-tile):focus-visible::after {
+        opacity: 1;
+      }
+
+      .tile:not(.logo-tile):focus-visible .product-title {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      .tile:not(.logo-tile):focus-visible .product-copy {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .logo-tile:focus-visible {
+        box-shadow: 0 12px 30px rgba(255, 255, 255, 0.12);
+      }
+
+      .logo-tile:focus-visible img {
+        filter: invert(1) drop-shadow(0 5px 9px rgba(0, 0, 0, 0.2));
+      }
+    }
+
+    /* =========================
+       LOGO
+    ========================= */
+
     .logo-tile {
       grid-column: span 2;
       grid-row: span 2;
+
       background: var(--white);
+      border-color: var(--white);
+
       align-items: center;
       justify-content: center;
+
       padding: clamp(32px, 5vw, 80px);
-      border-color: var(--white);
     }
 
     .logo-tile img {
       width: min(78%, 520px);
       height: auto;
       display: block;
-      filter: none;
-      transition: filter var(--ease), transform var(--ease);
-    }
 
-    /* The supplied SVG is white, so it is deliberately inverted on the white logo tile. */
-    .logo-tile img {
+      /*
+        The supplied SVG is white.
+        Inverting it makes it visible on the white tile.
+      */
       filter: invert(1);
+
+      transition: filter var(--ease);
     }
 
-    .logo-tile:hover,
-    .logo-tile:focus-visible {
-      box-shadow: 0 12px 30px rgba(255,255,255,.12);
-    }
-
-    .logo-tile:hover img,
-    .logo-tile:focus-visible img {
-      filter: invert(1) drop-shadow(0 5px 9px rgba(0,0,0,.2));
-    }
+    /* =========================
+       PRODUCT TITLE
+    ========================= */
 
     .product-title {
       font-family: "Bebas Neue", Impact, sans-serif;
+
       font-size: clamp(2.2rem, 5vw, 5.4rem);
-      line-height: .88;
-      letter-spacing: .015em;
-      text-transform: none;
-      transition: color var(--ease);
+      line-height: 0.88;
+
+      letter-spacing: 0.015em;
+
+      transition:
+        opacity var(--ease),
+        transform var(--ease),
+        color var(--ease);
     }
+
+    /* =========================
+       PRODUCT DESCRIPTION
+    ========================= */
 
     .product-copy {
       position: absolute;
+
       left: clamp(18px, 2vw, 30px);
       right: clamp(18px, 2vw, 30px);
       bottom: clamp(18px, 2vw, 30px);
+
       display: grid;
       gap: 10px;
-      transform: translateY(10px);
+
       opacity: 0;
+      transform: translateY(10px);
+
       pointer-events: none;
-      transition: opacity var(--ease), transform var(--ease);
+
+      transition:
+        opacity var(--ease),
+        transform var(--ease);
     }
 
     .product-description {
       max-width: 32rem;
-      font-size: clamp(.85rem, 1.1vw, 1rem);
+
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
       line-height: 1.35;
       font-weight: 500;
+
       color: var(--red);
     }
 
     .product-action {
-      font-size: .68rem;
+      font-size: 0.68rem;
       line-height: 1;
-      letter-spacing: .14em;
+
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+
       color: var(--red);
-      opacity: .62;
+      opacity: 0.62;
     }
 
-    .tile:hover .product-title,
-    .tile:focus-visible .product-title {
-      opacity: 0;
-      transform: translateY(-8px);
+    /* =========================
+       DESKTOP TILE STRUCTURE
+    ========================= */
+
+    .bento-tile {
+      grid-column: span 2;
+      grid-row: span 1;
     }
 
-    .tile:hover .product-copy,
-    .tile:focus-visible .product-copy {
-      opacity: 1;
-      transform: translateY(0);
+    .morph-tile {
+      grid-column: span 1;
+      grid-row: span 2;
     }
 
-    .tile:hover .product-description,
-    .tile:focus-visible .product-description,
-    .tile:hover .product-action,
-    .tile:focus-visible .product-action {
-      color: var(--red);
+    .tile:nth-of-type(4),
+    .tile:nth-of-type(5) {
+      grid-column: span 1;
+      grid-row: span 1;
     }
 
-    .bento-tile { grid-column: span 2; }
-    .morph-tile { grid-row: span 2; }
+    /* =========================
+       TABLET
+    ========================= */
 
     @media (max-width: 900px) {
+      body {
+        padding: 14px;
+      }
+
       .bento {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-auto-rows: minmax(170px, 1fr);
+        grid-template-rows: auto;
+        grid-auto-rows: minmax(220px, 1fr);
+        min-height: calc(100dvh - 28px);
       }
 
       .logo-tile {
         grid-column: span 2;
         grid-row: span 1;
-        min-height: 270px;
+
+        min-height: 260px;
       }
 
-      .bento-tile { grid-column: span 1; }
-      .morph-tile { grid-row: span 1; }
+      .bento-tile,
+      .morph-tile,
+      .tile:nth-of-type(4),
+      .tile:nth-of-type(5) {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
     }
 
-    @media (max-width: 560px) {
-      :root { --gap: 9px; --radius: 17px; }
+    /* =========================
+       MOBILE
+    ========================= */
 
-      body { padding: 9px; }
+    @media (max-width: 560px) {
+      :root {
+        --gap: 9px;
+        --radius: 18px;
+      }
+
+      body {
+        padding:
+          max(9px, env(safe-area-inset-top))
+          max(9px, env(safe-area-inset-right))
+          max(9px, env(safe-area-inset-bottom))
+          max(9px, env(safe-area-inset-left));
+
+        background: var(--bg);
+      }
 
       .bento {
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: 190px;
+        width: 100%;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+
+        gap: var(--gap);
+
         min-height: auto;
       }
 
+      /* Logo occupies the full first row */
       .logo-tile {
+        grid-column: 1 / -1;
+        grid-row: auto;
+
         min-height: 220px;
+
         padding: 28px;
       }
 
-      .logo-tile img { width: min(84%, 330px); }
+      .logo-tile img {
+        width: min(84%, 330px);
+      }
 
-      .tile { padding: 18px; }
-      .product-title { font-size: clamp(2rem, 12vw, 4rem); }
+      /* Four products = clean 2 × 2 grid */
+      .bento-tile,
+      .morph-tile,
+      .tile:nth-of-type(4),
+      .tile:nth-of-type(5) {
+        grid-column: span 1;
+        grid-row: auto;
 
-      /* Touch devices have no reliable hover. Keep the product label visible and let tap navigate. */
-      @media (hover: none) {
-        .tile:hover .product-title,
-        .tile:focus-visible .product-title {
-          opacity: 1;
-          transform: none;
-        }
+        min-height: 190px;
+      }
 
-        .tile:hover::after,
-        .tile:focus-visible::after {
-          opacity: 0;
-        }
+      .tile {
+        padding: 18px;
+      }
 
-        .tile:hover,
-        .tile:focus-visible {
-          color: var(--white);
-          box-shadow: none;
-        }
+      .product-title {
+        font-size: clamp(2rem, 12vw, 4rem);
+      }
 
-        .product-copy { display: none; }
+      /*
+        IMPORTANT:
+        On touch devices there is NO hover styling.
+
+        This prevents Chrome/Android from "sticking"
+        the desktop hover state after tapping a card.
+      */
+
+      .tile:not(.logo-tile):hover {
+        color: var(--white);
+        background: transparent;
+        border-color: var(--stroke);
+        box-shadow: none;
+      }
+
+      .tile:not(.logo-tile):hover::after {
+        opacity: 0;
+      }
+
+      .tile:not(.logo-tile):hover .product-title {
+        opacity: 1;
+        transform: none;
+        color: var(--white);
+      }
+
+      .tile:not(.logo-tile):hover .product-copy {
+        opacity: 0;
+        transform: none;
+      }
+
+      .tile:not(.logo-tile):focus-visible {
+        color: var(--white);
+        background: transparent;
+        border-color: var(--stroke);
+        outline: none;
+        box-shadow: none;
+      }
+
+      .tile:not(.logo-tile):focus-visible::after {
+        opacity: 0;
+      }
+
+      .tile:not(.logo-tile):focus-visible .product-title {
+        opacity: 1;
+        transform: none;
+        color: var(--white);
+      }
+
+      .tile:not(.logo-tile):focus-visible .product-copy {
+        opacity: 0;
+        transform: none;
+      }
+
+      .product-copy {
+        display: none;
+      }
+
+      .logo-tile:hover,
+      .logo-tile:focus-visible {
+        box-shadow: none;
+      }
+
+      .logo-tile:hover img,
+      .logo-tile:focus-visible img {
+        filter: invert(1);
       }
     }
 
+    /* =========================
+       VERY SMALL PHONES
+    ========================= */
+
+    @media (max-width: 380px) {
+      :root {
+        --gap: 7px;
+        --radius: 15px;
+      }
+
+      .logo-tile {
+        min-height: 190px;
+        padding: 22px;
+      }
+
+      .bento-tile,
+      .morph-tile,
+      .tile:nth-of-type(4),
+      .tile:nth-of-type(5) {
+        min-height: 155px;
+      }
+
+      .tile {
+        padding: 15px;
+      }
+
+      .product-title {
+        font-size: clamp(1.8rem, 11vw, 3rem);
+      }
+    }
+
+    /* =========================
+       REDUCED MOTION
+    ========================= */
+
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
+
 <body>
   <main class="bento" aria-label="thereisfarq tools">
-    <a class="tile logo-tile" href="https://www.thereisfarq.in" aria-label="thereisfarq website">
+
+    <!-- LOGO -->
+    <a
+      class="tile logo-tile"
+      href="https://www.thereisfarq.in"
+      aria-label="thereisfarq website"
+    >
       <img src="./wordk.svg" alt="thereisfarq" />
     </a>
 
-    <a class="tile bento-tile" href="https://thereisfarq.github.io/bento/">
+    <!-- BENTO -->
+    <a
+      class="tile bento-tile"
+      href="https://thereisfarq.github.io/bento/"
+    >
       <span class="product-title">Bento</span>
+
       <span class="product-copy">
-        <span class="product-description">Instant photo grids. No cropping, nothing uploaded.</span>
-        <span class="product-action">Open tool ↗</span>
+        <span class="product-description">
+          Instant photo grids. No cropping, nothing uploaded.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
       </span>
     </a>
 
-    <a class="tile morph-tile" href="https://thereisfarq.github.io/morph/">
+    <!-- MORPH -->
+    <a
+      class="tile morph-tile"
+      href="https://thereisfarq.github.io/morph/"
+    >
       <span class="product-title">Morph</span>
+
       <span class="product-copy">
-        <span class="product-description">Convert images or PDFs into print-ready files.</span>
-        <span class="product-action">Open tool ↗</span>
+        <span class="product-description">
+          Convert images or PDFs into print-ready files.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
       </span>
     </a>
 
-    <a class="tile" href="https://thereisfarq.github.io/color/">
+    <!-- COLOR -->
+    <a
+      class="tile"
+      href="https://thereisfarq.github.io/color/"
+    >
       <span class="product-title">&lt;Color&gt;</span>
+
       <span class="product-copy">
-        <span class="product-description">Train your eye on RGB and Hex codes.</span>
-        <span class="product-action">Open tool ↗</span>
+        <span class="product-description">
+          Train your eye on RGB and Hex codes.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
       </span>
     </a>
 
-    <a class="tile" href="https://thereisfarq.github.io/typedup/">
+    <!-- TYPEDUP -->
+    <a
+      class="tile"
+      href="https://thereisfarq.github.io/typedup/"
+    >
       <span class="product-title">TypedUp</span>
+
       <span class="product-copy">
-        <span class="product-description">Guess the font in a minimal type game.</span>
-        <span class="product-action">Open tool ↗</span>
+        <span class="product-description">
+          Guess the font in a minimal type game.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
       </span>
     </a>
+
   </main>
 </body>
 </html>
