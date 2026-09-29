@@ -7,10 +7,12 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
   <meta name="theme-color" content="#9C2227" />
+
   <title>thereisfarq</title>
+
   <meta
     name="description"
-    content="Small, entirely client-side tools by thereisfarq."
+    content="Tools, experiments and projects by thereisfarq."
   />
 
   <style>
@@ -27,8 +29,10 @@
       --white: #ffffff;
       --red: #9C2227;
       --stroke: rgba(255, 255, 255, 0.9);
+
       --radius: 24px;
       --gap: 14px;
+
       --ease: 220ms cubic-bezier(.2, .7, .2, 1);
     }
 
@@ -48,8 +52,12 @@
     body {
       color: var(--white);
       font-family: Arial, Helvetica, sans-serif;
-      padding: clamp(14px, 2.2vw, 30px);
+
+      padding:
+        clamp(14px, 2.2vw, 30px);
+
       overflow-x: hidden;
+
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -58,9 +66,9 @@
       text-decoration: none;
     }
 
-    /* =========================
-       BENTO GRID
-    ========================= */
+    /* =========================================
+       MAIN GRID
+       ========================================= */
 
     .bento {
       width: min(1500px, 100%);
@@ -68,25 +76,55 @@
 
       display: grid;
 
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      grid-template-rows: repeat(3, minmax(220px, 1fr));
+      /*
+        4 equal columns.
+
+        Layout:
+
+        ┌──────────────────────────────┐
+        │             LOGO             │
+        ├──────────────────────────────┤
+        │        GHULAAM CARD DECK     │
+        ├──────────────┬───────────────┤
+        │    BENTO     │     MORPH     │
+        ├──────────────┼───────────────┤
+        │   <COLOR>    │    TYPEDUP    │
+        ├──────────────────────────────┤
+        │             BLOG             │
+        └──────────────────────────────┘
+      */
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      grid-template-rows:
+        minmax(260px, 1fr)
+        minmax(190px, .75fr)
+        minmax(220px, 1fr)
+        minmax(220px, 1fr)
+        minmax(190px, .75fr);
 
       gap: var(--gap);
 
-      min-height: calc(100dvh - clamp(28px, 4.4vw, 60px));
+      min-height:
+        calc(100dvh - clamp(28px, 4.4vw, 60px));
     }
 
-    /* =========================
+    /* =========================================
        ALL TILES
-    ========================= */
+       ========================================= */
 
     .tile {
       position: relative;
+
       min-width: 0;
       min-height: 0;
 
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
+      border:
+        1px solid var(--stroke);
+
+      border-radius:
+        var(--radius);
 
       overflow: hidden;
       isolation: isolate;
@@ -96,7 +134,8 @@
       display: flex;
       align-items: flex-end;
 
-      padding: clamp(18px, 2vw, 30px);
+      padding:
+        clamp(18px, 2vw, 30px);
 
       color: var(--white);
 
@@ -109,26 +148,31 @@
 
     .tile::after {
       content: "";
+
       position: absolute;
       inset: 0;
+
       z-index: -1;
 
       background: var(--white);
 
       opacity: 0;
 
-      transition: opacity var(--ease);
+      transition:
+        opacity var(--ease);
     }
 
-    /* =========================
+    /* =========================================
        DESKTOP HOVER
-    ========================= */
+       ========================================= */
 
     @media (hover: hover) and (pointer: fine) {
 
       .tile:not(.logo-tile):hover {
         color: var(--red);
-        border-color: var(--white);
+
+        border-color:
+          var(--white);
       }
 
       .tile:not(.logo-tile):hover::after {
@@ -137,37 +181,53 @@
 
       .tile:not(.logo-tile):hover .product-title {
         opacity: 0;
-        transform: translateY(-8px);
+
+        transform:
+          translateY(-8px);
       }
 
       .tile:not(.logo-tile):hover .product-copy {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+          translateY(0);
       }
 
+      /* LOGO HOVER */
+
       .logo-tile:hover {
-        box-shadow: 0 12px 30px rgba(255, 255, 255, 0.12);
+        box-shadow:
+          0 12px 30px rgba(255, 255, 255, .12);
       }
 
       .logo-tile:hover img {
-        filter: invert(1) drop-shadow(0 5px 9px rgba(0, 0, 0, 0.2));
+        filter:
+          invert(1)
+          drop-shadow(
+            0 5px 9px rgba(0, 0, 0, .2)
+          );
       }
     }
 
-    /* =========================
+    /* =========================================
        KEYBOARD FOCUS
-    ========================= */
+       ========================================= */
 
     .tile:focus-visible {
-      outline: 2px solid var(--white);
-      outline-offset: 3px;
+      outline:
+        2px solid var(--white);
+
+      outline-offset:
+        3px;
     }
 
     @media (hover: hover) and (pointer: fine) {
 
       .tile:not(.logo-tile):focus-visible {
         color: var(--red);
-        border-color: var(--white);
+
+        border-color:
+          var(--white);
       }
 
       .tile:not(.logo-tile):focus-visible::after {
@@ -176,65 +236,112 @@
 
       .tile:not(.logo-tile):focus-visible .product-title {
         opacity: 0;
-        transform: translateY(-8px);
+
+        transform:
+          translateY(-8px);
       }
 
       .tile:not(.logo-tile):focus-visible .product-copy {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+          translateY(0);
       }
 
       .logo-tile:focus-visible {
-        box-shadow: 0 12px 30px rgba(255, 255, 255, 0.12);
+        box-shadow:
+          0 12px 30px rgba(255, 255, 255, .12);
       }
 
       .logo-tile:focus-visible img {
-        filter: invert(1) drop-shadow(0 5px 9px rgba(0, 0, 0, 0.2));
+        filter:
+          invert(1)
+          drop-shadow(
+            0 5px 9px rgba(0, 0, 0, .2)
+          );
       }
     }
 
-    /* =========================
+    /* =========================================
        LOGO
-    ========================= */
+       ========================================= */
 
     .logo-tile {
-      grid-column: 1 / 3;
-      grid-row: 1 / 3;
+      grid-column:
+        1 / -1;
 
-      background: var(--white);
-      border-color: var(--white);
+      grid-row:
+        1;
 
-      align-items: center;
-      justify-content: center;
+      background:
+        var(--white);
 
-      padding: clamp(32px, 5vw, 80px);
+      border-color:
+        var(--white);
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        clamp(32px, 5vw, 80px);
     }
 
     .logo-tile img {
-      width: min(78%, 520px);
-      height: auto;
-      display: block;
+      width:
+        min(78%, 520px);
+
+      height:
+        auto;
+
+      display:
+        block;
 
       /*
-        The supplied SVG is white.
-        Inverting it makes it visible on the white tile.
+        Supplied SVG is white.
+        Invert to make it visible
+        on the white tile.
       */
-      filter: invert(1);
 
-      transition: filter var(--ease);
+      filter:
+        invert(1);
+
+      transition:
+        filter var(--ease);
     }
 
-    /* =========================
+    /* =========================================
+       GHULAAM CARD DECK
+       ========================================= */
+
+    .ghulaam-tile {
+      grid-column:
+        1 / -1;
+
+      grid-row:
+        2;
+    }
+
+    /* =========================================
        PRODUCT TITLE
-    ========================= */
+       ========================================= */
 
     .product-title {
-      font-family: "Bebas Neue", Impact, sans-serif;
+      font-family:
+        "Bebas Neue",
+        Impact,
+        sans-serif;
 
-      font-size: clamp(2.2rem, 5vw, 5.4rem);
-      line-height: 0.88;
+      font-size:
+        clamp(2.2rem, 5vw, 5.4rem);
 
-      letter-spacing: 0.015em;
+      line-height:
+        .88;
+
+      letter-spacing:
+        .015em;
 
       transition:
         opacity var(--ease),
@@ -242,24 +349,36 @@
         color var(--ease);
     }
 
-    /* =========================
+    /* =========================================
        PRODUCT DESCRIPTION
-    ========================= */
+       ========================================= */
 
     .product-copy {
       position: absolute;
 
-      left: clamp(18px, 2vw, 30px);
-      right: clamp(18px, 2vw, 30px);
-      bottom: clamp(18px, 2vw, 30px);
+      left:
+        clamp(18px, 2vw, 30px);
 
-      display: grid;
-      gap: 10px;
+      right:
+        clamp(18px, 2vw, 30px);
 
-      opacity: 0;
-      transform: translateY(10px);
+      bottom:
+        clamp(18px, 2vw, 30px);
 
-      pointer-events: none;
+      display:
+        grid;
+
+      gap:
+        10px;
+
+      opacity:
+        0;
+
+      transform:
+        translateY(10px);
+
+      pointer-events:
+        none;
 
       transition:
         opacity var(--ease),
@@ -267,109 +386,203 @@
     }
 
     .product-description {
-      max-width: 32rem;
+      max-width:
+        40rem;
 
-      font-size: clamp(0.85rem, 1.1vw, 1rem);
-      line-height: 1.35;
-      font-weight: 500;
+      font-size:
+        clamp(.85rem, 1.1vw, 1rem);
 
-      color: var(--red);
+      line-height:
+        1.35;
+
+      font-weight:
+        500;
+
+      color:
+        var(--red);
     }
 
     .product-action {
-      font-size: 0.68rem;
-      line-height: 1;
+      font-size:
+        .68rem;
 
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      line-height:
+        1;
 
-      color: var(--red);
-      opacity: 0.62;
+      letter-spacing:
+        .14em;
+
+      text-transform:
+        uppercase;
+
+      color:
+        var(--red);
+
+      opacity:
+        .62;
     }
 
-    /* =========================
-       DESKTOP TILE POSITIONS
-    ========================= */
+    /* =========================================
+       TOOL POSITIONS
+       ========================================= */
 
     .bento-tile {
-      grid-column: 3 / 5;
-      grid-row: 1 / 2;
+      grid-column:
+        1 / 3;
+
+      grid-row:
+        3;
     }
 
     .morph-tile {
-      grid-column: 3 / 4;
-      grid-row: 2 / 4;
+      grid-column:
+        3 / 5;
+
+      grid-row:
+        3;
     }
 
     .color-tile {
-      grid-column: 4 / 5;
-      grid-row: 2 / 3;
+      grid-column:
+        1 / 3;
+
+      grid-row:
+        4;
     }
 
     .typedup-tile {
-      grid-column: 1 / 2;
-      grid-row: 3 / 4;
+      grid-column:
+        3 / 5;
+
+      grid-row:
+        4;
     }
+
+    /* =========================================
+       BLOG
+       ========================================= */
 
     .blog-tile {
-      grid-column: 2 / 3;
-      grid-row: 3 / 4;
+      grid-column:
+        1 / -1;
+
+      grid-row:
+        5;
     }
 
-    .ghulaam-tile {
-      grid-column: 4 / 5;
-      grid-row: 3 / 4;
-    }
-
-    /* =========================
+    /* =========================================
        TABLET
-    ========================= */
+       ========================================= */
 
     @media (max-width: 900px) {
 
       body {
-        padding: 14px;
+        padding:
+          14px;
       }
 
       .bento {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: auto;
-        grid-auto-rows: minmax(220px, 1fr);
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
 
-        min-height: calc(100dvh - 28px);
+        grid-template-rows:
+          minmax(240px, auto)
+          minmax(190px, auto)
+          minmax(190px, auto)
+          minmax(190px, auto)
+          minmax(190px, auto)
+          minmax(190px, auto);
+
+        min-height:
+          auto;
       }
+
+      /* Logo */
 
       .logo-tile {
-        grid-column: 1 / -1;
-        grid-row: auto;
+        grid-column:
+          1 / -1;
 
-        min-height: 260px;
+        grid-row:
+          1;
+
+        min-height:
+          260px;
       }
 
-      .bento-tile,
-      .morph-tile,
-      .color-tile,
-      .typedup-tile,
-      .blog-tile,
+      /* Ghulaam — FULL WIDTH */
+
       .ghulaam-tile {
-        grid-column: span 1;
-        grid-row: auto;
+        grid-column:
+          1 / -1;
+
+        grid-row:
+          2;
+
+        min-height:
+          190px;
       }
+
+      /* Tools — 50 / 50 */
 
       .bento-tile {
-        grid-column: span 2;
+        grid-column:
+          1 / 2;
+
+        grid-row:
+          3;
+      }
+
+      .morph-tile {
+        grid-column:
+          2 / 3;
+
+        grid-row:
+          3;
+      }
+
+      .color-tile {
+        grid-column:
+          1 / 2;
+
+        grid-row:
+          4;
+      }
+
+      .typedup-tile {
+        grid-column:
+          2 / 3;
+
+        grid-row:
+          4;
+      }
+
+      /* Blog — FULL WIDTH */
+
+      .blog-tile {
+        grid-column:
+          1 / -1;
+
+        grid-row:
+          5;
+
+        min-height:
+          190px;
       }
     }
 
-    /* =========================
+    /* =========================================
        MOBILE
-    ========================= */
+       ========================================= */
 
     @media (max-width: 560px) {
 
       :root {
-        --gap: 9px;
-        --radius: 18px;
+        --gap:
+          9px;
+
+        --radius:
+          18px;
       }
 
       body {
@@ -379,180 +592,319 @@
           max(9px, env(safe-area-inset-bottom))
           max(9px, env(safe-area-inset-left));
 
-        background: var(--bg);
+        background:
+          var(--bg);
       }
 
       .bento {
-        width: 100%;
+        width:
+          100%;
 
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: auto;
+        display:
+          grid;
 
-        gap: var(--gap);
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
 
-        min-height: auto;
+        /*
+          Explicit rows prevent
+          the browser from creating
+          unwanted empty space.
+        */
+
+        grid-template-rows:
+          220px
+          175px
+          175px
+          175px
+          175px
+          175px;
+
+        gap:
+          var(--gap);
+
+        min-height:
+          auto;
       }
 
-      /* Logo occupies the full first row */
+      /* =====================================
+         LOGO
+         ===================================== */
 
       .logo-tile {
-        grid-column: 1 / -1;
-        grid-row: auto;
+        grid-column:
+          1 / -1;
 
-        min-height: 220px;
+        grid-row:
+          1;
 
-        padding: 28px;
+        min-height:
+          220px;
+
+        padding:
+          28px;
       }
 
       .logo-tile img {
-        width: min(84%, 330px);
+        width:
+          min(84%, 330px);
       }
 
-      /* Product cards */
+      /* =====================================
+         GHULAAM — FULL BAR
+         ===================================== */
 
-      .bento-tile,
-      .morph-tile,
-      .color-tile,
-      .typedup-tile,
-      .blog-tile,
       .ghulaam-tile {
-        grid-column: span 1;
-        grid-row: auto;
+        grid-column:
+          1 / -1;
 
-        min-height: 175px;
+        grid-row:
+          2;
+
+        min-height:
+          175px;
       }
 
-      /* Make Bento full width on mobile */
+      /* =====================================
+         TOOLS — 50 / 50
+         ===================================== */
+
       .bento-tile {
-        grid-column: 1 / -1;
-        min-height: 175px;
+        grid-column:
+          1 / 2;
+
+        grid-row:
+          3;
+
+        min-height:
+          175px;
+      }
+
+      .morph-tile {
+        grid-column:
+          2 / 3;
+
+        grid-row:
+          3;
+
+        min-height:
+          175px;
+      }
+
+      .color-tile {
+        grid-column:
+          1 / 2;
+
+        grid-row:
+          4;
+
+        min-height:
+          175px;
+      }
+
+      .typedup-tile {
+        grid-column:
+          2 / 3;
+
+        grid-row:
+          4;
+
+        min-height:
+          175px;
+      }
+
+      /* =====================================
+         BLOG — FULL BAR
+         ===================================== */
+
+      .blog-tile {
+        grid-column:
+          1 / -1;
+
+        grid-row:
+          5;
+
+        min-height:
+          175px;
       }
 
       .tile {
-        padding: 18px;
+        padding:
+          18px;
       }
 
       .product-title {
-        font-size: clamp(2rem, 12vw, 4rem);
+        font-size:
+          clamp(2rem, 12vw, 4rem);
       }
 
-      /*
-        IMPORTANT:
-        On touch devices there is NO hover styling.
-
-        This prevents Chrome/Android from "sticking"
-        the desktop hover state after tapping a card.
-      */
+      /* =====================================
+         TOUCH DEVICES
+         ===================================== */
 
       .tile:not(.logo-tile):hover {
-        color: var(--white);
-        background: transparent;
-        border-color: var(--stroke);
-        box-shadow: none;
+        color:
+          var(--white);
+
+        background:
+          transparent;
+
+        border-color:
+          var(--stroke);
+
+        box-shadow:
+          none;
       }
 
       .tile:not(.logo-tile):hover::after {
-        opacity: 0;
+        opacity:
+          0;
       }
 
       .tile:not(.logo-tile):hover .product-title {
-        opacity: 1;
-        transform: none;
-        color: var(--white);
+        opacity:
+          1;
+
+        transform:
+          none;
+
+        color:
+          var(--white);
       }
 
       .tile:not(.logo-tile):hover .product-copy {
-        opacity: 0;
-        transform: none;
+        opacity:
+          0;
+
+        transform:
+          none;
       }
 
       .tile:not(.logo-tile):focus-visible {
-        color: var(--white);
-        background: transparent;
-        border-color: var(--stroke);
-        outline: none;
-        box-shadow: none;
+        color:
+          var(--white);
+
+        background:
+          transparent;
+
+        border-color:
+          var(--stroke);
+
+        outline:
+          none;
+
+        box-shadow:
+          none;
       }
 
       .tile:not(.logo-tile):focus-visible::after {
-        opacity: 0;
+        opacity:
+          0;
       }
 
       .tile:not(.logo-tile):focus-visible .product-title {
-        opacity: 1;
-        transform: none;
-        color: var(--white);
+        opacity:
+          1;
+
+        transform:
+          none;
+
+        color:
+          var(--white);
       }
 
       .tile:not(.logo-tile):focus-visible .product-copy {
-        opacity: 0;
-        transform: none;
+        opacity:
+          0;
+
+        transform:
+          none;
       }
 
       .product-copy {
-        display: none;
+        display:
+          none;
       }
 
       .logo-tile:hover,
       .logo-tile:focus-visible {
-        box-shadow: none;
+        box-shadow:
+          none;
       }
 
       .logo-tile:hover img,
       .logo-tile:focus-visible img {
-        filter: invert(1);
+        filter:
+          invert(1);
       }
     }
 
-    /* =========================
+    /* =========================================
        VERY SMALL PHONES
-    ========================= */
+       ========================================= */
 
     @media (max-width: 380px) {
 
       :root {
-        --gap: 7px;
-        --radius: 15px;
+        --gap:
+          7px;
+
+        --radius:
+          15px;
+      }
+
+      .bento {
+        grid-template-rows:
+          190px
+          155px
+          155px
+          155px
+          155px;
       }
 
       .logo-tile {
-        min-height: 190px;
-        padding: 22px;
+        min-height:
+          190px;
+
+        padding:
+          22px;
       }
 
+      .ghulaam-tile,
       .bento-tile,
       .morph-tile,
       .color-tile,
       .typedup-tile,
-      .blog-tile,
-      .ghulaam-tile {
-        min-height: 155px;
-      }
-
-      .bento-tile {
-        min-height: 155px;
+      .blog-tile {
+        min-height:
+          155px;
       }
 
       .tile {
-        padding: 15px;
+        padding:
+          15px;
       }
 
       .product-title {
-        font-size: clamp(1.8rem, 11vw, 3rem);
+        font-size:
+          clamp(1.8rem, 11vw, 3rem);
       }
     }
 
-    /* =========================
+    /* =========================================
        REDUCED MOTION
-    ========================= */
+       ========================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
       *,
       *::before,
       *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+        transition-duration:
+          .01ms !important;
+
+        animation-duration:
+          .01ms !important;
       }
     }
   </style>
@@ -562,9 +914,9 @@
 
   <main class="bento" aria-label="thereisfarq">
 
-    <!-- =====================
+    <!-- =====================================
          LOGO
-    ====================== -->
+         ===================================== -->
 
     <a
       class="tile logo-tile"
@@ -578,132 +930,9 @@
     </a>
 
 
-    <!-- =====================
-         BENTO
-    ====================== -->
-
-    <a
-      class="tile bento-tile"
-      href="https://thereisfarq.github.io/bento/"
-    >
-      <span class="product-title">
-        Bento
-      </span>
-
-      <span class="product-copy">
-        <span class="product-description">
-          Instant photo grids. No cropping, nothing uploaded.
-        </span>
-
-        <span class="product-action">
-          Open tool ↗
-        </span>
-      </span>
-    </a>
-
-
-    <!-- =====================
-         MORPH
-    ====================== -->
-
-    <a
-      class="tile morph-tile"
-      href="https://thereisfarq.github.io/morph/"
-    >
-      <span class="product-title">
-        Morph
-      </span>
-
-      <span class="product-copy">
-        <span class="product-description">
-          Convert images or PDFs into print-ready files.
-        </span>
-
-        <span class="product-action">
-          Open tool ↗
-        </span>
-      </span>
-    </a>
-
-
-    <!-- =====================
-         COLOR
-    ====================== -->
-
-    <a
-      class="tile color-tile"
-      href="https://thereisfarq.github.io/color/"
-    >
-      <span class="product-title">
-        &lt;Color&gt;
-      </span>
-
-      <span class="product-copy">
-        <span class="product-description">
-          Train your eye on RGB and Hex codes.
-        </span>
-
-        <span class="product-action">
-          Open tool ↗
-        </span>
-      </span>
-    </a>
-
-
-    <!-- =====================
-         TYPEDUP
-    ====================== -->
-
-    <a
-      class="tile typedup-tile"
-      href="https://thereisfarq.github.io/typedup/"
-    >
-      <span class="product-title">
-        TypedUp
-      </span>
-
-      <span class="product-copy">
-        <span class="product-description">
-          Guess the font in a minimal type game.
-        </span>
-
-        <span class="product-action">
-          Open tool ↗
-        </span>
-      </span>
-    </a>
-
-
-    <!-- =====================
-         BLOG
-    ====================== -->
-
-    <a
-      class="tile blog-tile"
-      href="https://thereisfarq.substack.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="thereisfarq Blog"
-    >
-      <span class="product-title">
-        Blog
-      </span>
-
-      <span class="product-copy">
-        <span class="product-description">
-          Thoughts, experiments, ideas and stories from thereisfarq.
-        </span>
-
-        <span class="product-action">
-          Read blog ↗
-        </span>
-      </span>
-    </a>
-
-
-    <!-- =====================
-         GHULAAM CARD DECK
-    ====================== -->
+    <!-- =====================================
+         GHULAAM CARD DECK — FULL WIDTH
+         ===================================== -->
 
     <a
       class="tile ghulaam-tile"
@@ -712,35 +941,169 @@
       rel="noopener noreferrer"
       aria-label="Ask about Ghulaam Card Deck on Instagram"
     >
+
       <span class="product-title">
-        Ghulaam
+        Ghulaam Card Deck
       </span>
 
       <span class="product-copy">
+
         <span class="product-description">
-          Want to know more about the Ghulaam Card Deck? Send us a message on Instagram.
+          A card deck by thereisfarq. Message us on Instagram to know more about Ghulaam.
         </span>
 
         <span class="product-action">
           Message on Instagram ↗
         </span>
+
       </span>
+
+    </a>
+
+
+    <!-- =====================================
+         BENTO
+         ===================================== -->
+
+    <a
+      class="tile bento-tile"
+      href="https://thereisfarq.github.io/bento/"
+    >
+
+      <span class="product-title">
+        Bento
+      </span>
+
+      <span class="product-copy">
+
+        <span class="product-description">
+          Instant photo grids. No cropping, nothing uploaded.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <!-- =====================================
+         MORPH
+         ===================================== -->
+
+    <a
+      class="tile morph-tile"
+      href="https://thereisfarq.github.io/morph/"
+    >
+
+      <span class="product-title">
+        Morph
+      </span>
+
+      <span class="product-copy">
+
+        <span class="product-description">
+          Convert images or PDFs into print-ready files.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <!-- =====================================
+         COLOR
+         ===================================== -->
+
+    <a
+      class="tile color-tile"
+      href="https://thereisfarq.github.io/color/"
+    >
+
+      <span class="product-title">
+        &lt;Color&gt;
+      </span>
+
+      <span class="product-copy">
+
+        <span class="product-description">
+          Train your eye on RGB and Hex codes.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <!-- =====================================
+         TYPEDUP
+         ===================================== -->
+
+    <a
+      class="tile typedup-tile"
+      href="https://thereisfarq.github.io/typedup/"
+    >
+
+      <span class="product-title">
+        TypedUp
+      </span>
+
+      <span class="product-copy">
+
+        <span class="product-description">
+          Guess the font in a minimal type game.
+        </span>
+
+        <span class="product-action">
+          Open tool ↗
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <!-- =====================================
+         BLOG — FULL WIDTH
+         ===================================== -->
+
+    <a
+      class="tile blog-tile"
+      href="https://thereisfarq.substack.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="thereisfarq Blog"
+    >
+
+      <span class="product-title">
+        Blog
+      </span>
+
+      <span class="product-copy">
+
+        <span class="product-description">
+          Thoughts, experiments, ideas and stories from thereisfarq.
+        </span>
+
+        <span class="product-action">
+          Read blog ↗
+        </span>
+
+      </span>
+
     </a>
 
   </main>
-
-  <script>
-    /*
-      Instagram does not provide a reliable public URL parameter
-      that automatically inserts a message into an Instagram DM.
-
-      The Ghulaam card therefore opens the direct-message conversation
-      with @thereisfarq.
-
-      The intended message is:
-      "I want to know more about Ghulaam"
-    */
-  </script>
 
 </body>
 </html>
