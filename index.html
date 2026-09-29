@@ -1,178 +1,302 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#ffffff" />
-<title>thereisfarq</title>
-<meta name="description" content="Small, entirely client-side tools by thereisfarq." />
-<style>
-  :root {
-    --bg: #ffffff;
-    --fg: #000000;
-    --border: #cccccc;
-    --border-subtle: #e5e5e5;
-    --accent: #c41e24;
-    --muted: #888888;
-    --ui-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --transition-fast: 180ms ease-out;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
+  <title>thereisfarq</title>
+  <meta name="description" content="Small, entirely client-side tools by thereisfarq." />
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("./BebasNeue-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
 
-  * { box-sizing: border-box; }
+    :root {
+      --bg: #111111;
+      --white: #ffffff;
+      --red: #b00000;
+      --stroke: rgba(255, 255, 255, 0.9);
+      --radius: 24px;
+      --gap: 14px;
+      --ease: 220ms cubic-bezier(.2,.7,.2,1);
+    }
 
-  html, body {
-    background: var(--bg);
-    color: var(--fg);
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
+    * { box-sizing: border-box; }
 
-  body {
-    font-family: var(--ui-font);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+    }
 
-  a { color: inherit; text-decoration: none; }
+    body {
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      padding: clamp(14px, 2.2vw, 30px);
+      overflow-x: hidden;
+    }
 
-  .home {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 2rem 1.5rem;
-  }
+    a { color: inherit; text-decoration: none; }
 
-  .home__main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 22rem;
-    gap: 3rem;
-  }
+    .bento {
+      width: min(1500px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: minmax(150px, 1fr);
+      gap: var(--gap);
+      min-height: calc(100vh - clamp(28px, 4.4vw, 60px));
+    }
 
-  .home__mark {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.6rem;
-  }
+    .tile {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: transparent;
+      display: flex;
+      align-items: flex-end;
+      padding: clamp(18px, 2vw, 30px);
+      isolation: isolate;
+      transition:
+        background-color var(--ease),
+        color var(--ease),
+        border-color var(--ease),
+        box-shadow var(--ease),
+        transform var(--ease);
+    }
 
-  .home__mark svg {
-    width: 118px;
-    height: auto;
-    display: block;
-  }
+    .tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: var(--white);
+      opacity: 0;
+      transition: opacity var(--ease);
+    }
 
-  .home__tagline {
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--muted);
-    letter-spacing: 0.01em;
-  }
+    .tile:not(.logo-tile):hover,
+    .tile:not(.logo-tile):focus-visible {
+      color: var(--red);
+      border-color: var(--white);
+    }
 
-  .home__levels {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
+    .tile:not(.logo-tile):hover::after,
+    .tile:not(.logo-tile):focus-visible::after {
+      opacity: 1;
+    }
 
-  .home__level {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    border-top: 1px solid var(--border-subtle);
-    transition: color var(--transition-fast);
-  }
+    .tile:focus-visible {
+      outline: 2px solid var(--white);
+      outline-offset: 3px;
+    }
 
-  .home__level:last-child { border-bottom: 1px solid var(--border-subtle); }
+    .logo-tile {
+      grid-column: span 2;
+      grid-row: span 2;
+      background: var(--white);
+      align-items: center;
+      justify-content: center;
+      padding: clamp(32px, 5vw, 80px);
+      border-color: var(--white);
+    }
 
-  .home__level:hover,
-  .home__level:focus-visible { color: var(--accent); }
+    .logo-tile img {
+      width: min(78%, 520px);
+      height: auto;
+      display: block;
+      filter: none;
+      transition: filter var(--ease), transform var(--ease);
+    }
 
-  .home__level-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-  }
+    /* The supplied SVG is white, so it is deliberately inverted on the white logo tile. */
+    .logo-tile img {
+      filter: invert(1);
+    }
 
-  .home__level-sub {
-    margin-top: 0.35rem;
-    font-size: 0.8rem;
-    opacity: 0.5;
-    letter-spacing: 0.02em;
-  }
+    .logo-tile:hover,
+    .logo-tile:focus-visible {
+      box-shadow: 0 12px 30px rgba(255,255,255,.12);
+    }
 
-  .home__footer {
-    padding: 1.5rem;
-    text-align: center;
-  }
+    .logo-tile:hover img,
+    .logo-tile:focus-visible img {
+      filter: invert(1) drop-shadow(0 5px 9px rgba(0,0,0,.2));
+    }
 
-  .home__footer a {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    color: var(--muted);
-    text-transform: uppercase;
-    transition: color var(--transition-fast);
-  }
+    .product-title {
+      font-family: "Bebas Neue", Impact, sans-serif;
+      font-size: clamp(2.2rem, 5vw, 5.4rem);
+      line-height: .88;
+      letter-spacing: .015em;
+      text-transform: none;
+      transition: color var(--ease);
+    }
 
-  .home__footer a:hover { color: var(--accent); }
-</style>
+    .product-copy {
+      position: absolute;
+      left: clamp(18px, 2vw, 30px);
+      right: clamp(18px, 2vw, 30px);
+      bottom: clamp(18px, 2vw, 30px);
+      display: grid;
+      gap: 10px;
+      transform: translateY(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--ease), transform var(--ease);
+    }
+
+    .product-description {
+      max-width: 32rem;
+      font-size: clamp(.85rem, 1.1vw, 1rem);
+      line-height: 1.35;
+      font-weight: 500;
+      color: var(--red);
+    }
+
+    .product-action {
+      font-size: .68rem;
+      line-height: 1;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--red);
+      opacity: .62;
+    }
+
+    .tile:hover .product-title,
+    .tile:focus-visible .product-title {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    .tile:hover .product-copy,
+    .tile:focus-visible .product-copy {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tile:hover .product-description,
+    .tile:focus-visible .product-description,
+    .tile:hover .product-action,
+    .tile:focus-visible .product-action {
+      color: var(--red);
+    }
+
+    .bento-tile { grid-column: span 2; }
+    .morph-tile { grid-row: span 2; }
+
+    @media (max-width: 900px) {
+      .bento {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: minmax(170px, 1fr);
+      }
+
+      .logo-tile {
+        grid-column: span 2;
+        grid-row: span 1;
+        min-height: 270px;
+      }
+
+      .bento-tile { grid-column: span 1; }
+      .morph-tile { grid-row: span 1; }
+    }
+
+    @media (max-width: 560px) {
+      :root { --gap: 9px; --radius: 17px; }
+
+      body { padding: 9px; }
+
+      .bento {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 190px;
+        min-height: auto;
+      }
+
+      .logo-tile {
+        min-height: 220px;
+        padding: 28px;
+      }
+
+      .logo-tile img { width: min(84%, 330px); }
+
+      .tile { padding: 18px; }
+      .product-title { font-size: clamp(2rem, 12vw, 4rem); }
+
+      /* Touch devices have no reliable hover. Keep the product label visible and let tap navigate. */
+      @media (hover: none) {
+        .tile:hover .product-title,
+        .tile:focus-visible .product-title {
+          opacity: 1;
+          transform: none;
+        }
+
+        .tile:hover::after,
+        .tile:focus-visible::after {
+          opacity: 0;
+        }
+
+        .tile:hover,
+        .tile:focus-visible {
+          color: var(--white);
+          box-shadow: none;
+        }
+
+        .product-copy { display: none; }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="bento" aria-label="thereisfarq tools">
+    <a class="tile logo-tile" href="https://www.thereisfarq.com" aria-label="thereisfarq website">
+      <img src="./wordk.svg" alt="thereisfarq" />
+    </a>
 
-<div class="home">
-  <div class="home__main">
-    <div class="home__mark">
-      <svg width="211" height="189" viewBox="0 0 211 189" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="thereisfarq">
-        <path d="M206.493 117.575V112.319H209.735V126.686H206.493V121.431H192.2V117.575H206.493Z" fill="#B00000"/>
-        <path d="M200.894 129.838C200.157 129.838 199.436 129.919 198.732 130.083C198.045 130.263 197.423 130.542 196.866 130.918C196.309 131.295 195.859 131.786 195.515 132.392C195.188 132.997 195.024 133.734 195.024 134.602C195.024 135.47 195.188 136.206 195.515 136.812C195.859 137.418 196.309 137.909 196.866 138.286C197.423 138.662 198.045 138.932 198.732 139.096C199.436 139.276 200.157 139.366 200.894 139.366C201.663 139.366 202.408 139.276 203.128 139.096C203.849 138.932 204.487 138.662 205.044 138.286C205.617 137.909 206.067 137.418 206.395 136.812C206.738 136.206 206.91 135.47 206.91 134.602C206.91 133.734 206.738 132.997 206.395 132.392C206.067 131.786 205.617 131.295 205.044 130.918C204.487 130.542 203.849 130.263 203.128 130.083C202.408 129.919 201.663 129.838 200.894 129.838ZM200.894 125.982C202.203 125.982 203.415 126.178 204.528 126.571C205.658 126.964 206.64 127.529 207.475 128.266C208.31 129.003 208.965 129.903 209.44 130.967C209.915 132.048 210.152 133.259 210.152 134.602C210.152 135.961 209.915 137.172 209.44 138.236C208.965 139.301 208.31 140.201 207.475 140.938C206.64 141.675 205.658 142.239 204.528 142.632C203.415 143.025 202.203 143.222 200.894 143.222C199.617 143.222 198.421 143.025 197.308 142.632C196.211 142.239 195.253 141.675 194.435 140.938C193.616 140.201 192.969 139.301 192.495 138.236C192.036 137.172 191.807 135.961 191.807 134.602C191.807 133.259 192.036 132.048 192.495 130.967C192.969 129.903 193.616 129.003 194.435 128.266C195.253 127.529 196.211 126.964 197.308 126.571C198.421 126.178 199.617 125.982 200.894 125.982Z" fill="#B00000"/>
-        <path d="M200.894 146.987C200.157 146.987 199.436 147.069 198.732 147.233C198.045 147.413 197.423 147.691 196.866 148.068C196.309 148.444 195.859 148.935 195.515 149.541C195.188 150.147 195.024 150.884 195.024 151.751C195.024 152.619 195.188 153.356 195.515 153.962C195.859 154.567 196.309 155.059 196.866 155.435C197.423 155.812 198.045 156.082 198.732 156.246C199.436 156.426 200.157 156.516 200.894 156.516C201.663 156.516 202.408 156.426 203.128 156.246C203.849 156.082 204.487 155.812 205.044 155.435C205.617 155.059 206.067 154.567 206.395 153.962C206.738 153.356 206.91 152.619 206.91 151.751C206.91 150.884 206.738 150.147 206.395 149.541C206.067 148.935 205.617 148.444 205.044 148.068C204.487 147.691 203.849 147.413 203.128 147.233C202.408 147.069 201.663 146.987 200.894 146.987ZM200.894 143.131C202.203 143.131 203.415 143.328 204.528 143.721C205.658 144.114 206.64 144.679 207.475 145.415C208.31 146.152 208.965 147.053 209.44 148.117C209.915 149.197 210.152 150.409 210.152 151.751C210.152 153.11 209.915 154.322 209.44 155.386C208.965 156.45 208.31 157.351 207.475 158.087C206.64 158.824 205.658 159.389 204.528 159.782C203.415 160.175 202.203 160.371 200.894 160.371C199.617 160.371 198.421 160.175 197.308 159.782C196.211 159.389 195.253 158.824 194.435 158.087C193.616 157.351 192.969 156.45 192.495 155.386C192.036 154.322 191.807 153.11 191.807 151.751C191.807 150.409 192.036 149.197 192.495 148.117C192.969 147.053 193.616 146.152 194.435 145.415C195.253 144.679 196.211 144.114 197.308 143.721C198.421 143.328 199.617 143.131 200.894 143.131Z" fill="#B00000"/>
-        <path d="M209.735 161.042V164.898H195.442V173.444L192.2 173.444V161.042H209.735Z" fill="#B00000"/>
-        <path d="M198.02 176.263C197.431 176.263 196.932 176.369 196.522 176.582C196.113 176.795 195.777 177.073 195.515 177.417C195.27 177.777 195.081 178.195 194.95 178.67C194.836 179.144 194.779 179.635 194.779 180.143C194.779 180.487 194.803 180.855 194.852 181.248C194.918 181.641 195.032 182.009 195.196 182.353C195.36 182.697 195.581 182.984 195.859 183.213C196.154 183.442 196.522 183.557 196.964 183.557C197.439 183.557 197.824 183.401 198.118 183.09C198.413 182.795 198.659 182.402 198.855 181.911C199.052 181.42 199.224 180.863 199.371 180.241C199.518 179.619 199.682 178.989 199.862 178.35C200.026 177.695 200.222 177.057 200.452 176.435C200.697 175.813 201.008 175.256 201.385 174.765C201.761 174.274 202.228 173.872 202.785 173.561C203.358 173.267 204.045 173.119 204.847 173.119C205.748 173.119 206.526 173.308 207.18 173.684C207.852 174.077 208.408 174.585 208.85 175.207C209.293 175.829 209.62 176.533 209.833 177.319C210.046 178.105 210.152 178.891 210.152 179.676C210.152 180.593 210.046 181.469 209.833 182.304C209.636 183.156 209.309 183.909 208.85 184.564C208.392 185.218 207.803 185.734 207.082 186.111C206.378 186.504 205.519 186.7 204.504 186.7V182.967C205.028 182.934 205.461 182.82 205.805 182.623C206.149 182.443 206.419 182.198 206.616 181.887C206.812 181.576 206.951 181.215 207.033 180.806C207.115 180.413 207.156 179.979 207.156 179.505C207.156 179.193 207.123 178.882 207.058 178.571C206.992 178.26 206.878 177.974 206.714 177.712C206.55 177.466 206.346 177.262 206.1 177.098C205.854 176.934 205.543 176.852 205.167 176.852C204.823 176.852 204.545 176.918 204.332 177.049C204.119 177.18 203.922 177.433 203.742 177.81C203.562 178.203 203.382 178.735 203.202 179.406C203.022 180.094 202.793 180.986 202.514 182.083C202.449 182.411 202.326 182.861 202.146 183.434C201.982 184.023 201.712 184.604 201.336 185.177C200.959 185.751 200.452 186.242 199.813 186.651C199.191 187.077 198.389 187.289 197.406 187.289C196.604 187.289 195.859 187.134 195.172 186.823C194.484 186.512 193.886 186.045 193.379 185.423C192.888 184.817 192.503 184.056 192.225 183.139C191.946 182.239 191.807 181.191 191.807 179.996C191.807 179.03 191.93 178.088 192.175 177.171C192.405 176.271 192.773 175.469 193.281 174.765C193.788 174.077 194.435 173.529 195.221 173.119C196.006 172.71 196.94 172.514 198.02 172.53V176.263Z" fill="#B00000"/>
-        <path d="M12.5654 123.845H0V109.802H12.5654V103.889C12.5654 97.0884 14.6842 91.5203 18.922 87.184C23.1597 82.8477 29.5656 80.6796 38.1396 80.6796C40.0121 80.6796 41.8845 80.7781 43.757 80.9752C45.6295 81.0738 47.4527 81.1723 49.2267 81.2709V96.9406C46.7629 96.645 44.2005 96.4971 41.5396 96.4971C38.6816 96.4971 36.612 97.187 35.3309 98.5667C34.1482 99.8479 33.5569 102.065 33.5569 105.219V109.802H48.0441V123.845H33.5569V188.656H12.5654V123.845Z" fill="black"/>
-        <path d="M135.654 161.394C135.654 163.66 136.097 165.631 136.984 167.307C137.97 168.883 139.202 170.214 140.68 171.298C142.158 172.284 143.834 173.023 145.706 173.515C147.677 174.008 149.697 174.255 151.767 174.255C153.245 174.255 154.773 174.107 156.35 173.811C158.025 173.417 159.503 172.875 160.784 172.185C162.164 171.397 163.298 170.411 164.185 169.228C165.071 167.947 165.515 166.37 165.515 164.498C165.515 161.344 163.396 158.979 159.158 157.402C155.019 155.825 149.205 154.249 141.715 152.672C138.66 151.982 135.654 151.193 132.697 150.306C129.839 149.321 127.277 148.089 125.01 146.611C122.743 145.034 120.92 143.112 119.541 140.845C118.161 138.48 117.471 135.622 117.471 132.271C117.471 127.344 118.407 123.303 120.28 120.15C122.251 116.996 124.813 114.532 127.967 112.758C131.12 110.886 134.668 109.605 138.61 108.915C142.552 108.126 146.593 107.732 150.732 107.732C154.871 107.732 158.863 108.126 162.706 108.915C166.648 109.703 170.147 111.034 173.202 112.906C176.257 114.779 178.77 117.292 180.741 120.445C182.811 123.5 184.043 127.393 184.437 132.124H164.48C164.185 128.083 162.657 125.373 159.898 123.993C157.138 122.515 153.886 121.776 150.141 121.776C148.958 121.776 147.677 121.874 146.297 122.071C144.918 122.17 143.636 122.466 142.454 122.958C141.37 123.451 140.434 124.19 139.645 125.176C138.857 126.063 138.462 127.295 138.462 128.871C138.462 130.744 139.152 132.271 140.532 133.454C141.912 134.637 143.686 135.622 145.854 136.411C148.121 137.101 150.683 137.741 153.541 138.332C156.399 138.924 159.306 139.564 162.263 140.254C165.318 140.944 168.274 141.782 171.132 142.767C174.089 143.753 176.701 145.083 178.967 146.759C181.234 148.335 183.057 150.356 184.437 152.82C185.817 155.185 186.507 158.141 186.507 161.689C186.507 166.715 185.472 170.953 183.402 174.402C181.431 177.753 178.82 180.463 175.567 182.533C172.315 184.603 168.57 186.032 164.332 186.82C160.193 187.707 155.955 188.15 151.619 188.15C147.184 188.15 142.848 187.707 138.61 186.82C134.373 185.933 130.578 184.455 127.228 182.385C123.975 180.316 121.265 177.605 119.097 174.255C117.027 170.805 115.894 166.518 115.697 161.394H135.654Z" fill="black"/>
-        <path d="M54.1847 52.6267C54.4803 47.6991 55.7122 43.6092 57.8803 40.357C60.0485 37.1048 62.8079 34.4932 66.1587 32.5221C69.5095 30.5511 73.2544 29.1714 77.3936 28.3829C81.6313 27.496 85.8691 27.0525 90.1068 27.0525C93.9503 27.0525 97.8431 27.3481 101.785 27.9395C105.727 28.4322 109.324 29.467 112.577 31.0438C115.829 32.6207 118.49 34.8381 120.559 37.6961C122.629 40.4555 123.664 44.1512 123.664 48.7832V88.5489C123.664 94.2049 123.664 105.549 123.664 105.549H103.559V98.1577C100.208 101.607 96.2663 104.021 91.7329 105.401C87.1995 106.781 82.5676 107.471 77.8371 107.471C74.1907 107.471 70.7907 107.027 67.637 106.14C64.4833 105.253 61.7239 103.874 59.3586 102.001C56.9934 100.129 55.1209 97.7634 53.7412 94.9054C52.46 92.0474 51.8194 88.6474 51.8194 84.7053C51.8194 80.369 52.5585 76.8212 54.0368 74.0617C55.6137 71.2037 57.5847 68.937 59.9499 67.2617C62.4137 65.5863 65.1732 64.3544 68.2283 63.566C71.382 62.679 74.5356 61.9891 77.6893 61.4964C80.8429 61.0036 83.9473 60.6094 87.0024 60.3137C90.0575 60.0181 92.7677 59.5746 95.133 58.9833C97.4982 58.392 99.3707 57.5543 100.75 56.4702C102.13 55.2876 102.771 53.6122 102.672 51.4441C102.672 49.1774 102.278 47.4035 101.49 46.1223C100.8 44.7426 99.8142 43.7078 98.533 43.0179C97.3504 42.2295 95.9214 41.7367 94.246 41.5396C92.6692 41.244 90.9445 41.0961 89.072 41.0961C84.9329 41.0961 81.6806 41.9831 79.3154 43.757C76.9501 45.531 75.5704 48.4875 75.1762 52.6267H54.1847ZM102.672 68.1486C101.785 68.937 100.652 69.5776 99.2721 70.0704C97.991 70.4646 96.562 70.8095 94.9851 71.1052C93.5069 71.4008 91.93 71.6472 90.2546 71.8443C88.5793 72.0414 86.9039 72.2878 85.2285 72.5835C83.6517 72.8791 82.0748 73.2733 80.498 73.7661C79.0197 74.2588 77.6893 74.9487 76.5067 75.8357C75.4226 76.6241 74.5356 77.6589 73.8458 78.9401C73.1559 80.2212 72.811 81.8473 72.811 83.8184C72.811 85.6909 73.1559 87.2677 73.8458 88.5489C74.5356 89.83 75.4719 90.8648 76.6545 91.6532C77.8371 92.3431 79.2168 92.8359 80.7937 93.1315C82.3705 93.4272 83.9966 93.575 85.672 93.575C89.8112 93.575 93.0141 92.8851 95.2808 91.5054C97.5475 90.1257 99.2229 88.4996 100.307 86.6271C101.391 84.6561 102.032 82.685 102.229 80.714C102.524 78.7429 102.672 77.1661 102.672 75.9835V68.1486Z" fill="black"/>
-        <path d="M126.653 0H147.644V39.7657H148.088C150.749 35.3308 154.149 32.1279 158.288 30.1569C162.427 28.0873 166.468 27.0525 170.41 27.0525C176.027 27.0525 180.61 27.8409 184.158 29.4177C187.804 30.896 190.662 33.0149 192.732 35.7743C194.801 38.4352 196.23 41.7367 197.019 45.6788C197.906 49.5223 198.349 53.8093 198.349 58.5398V105.549H177.358V62.3833C177.358 56.076 176.372 51.3948 174.401 48.3397C172.43 45.186 168.931 43.6092 163.905 43.6092C158.189 43.6092 154.05 45.3339 151.488 48.7832C148.925 52.1339 147.644 57.7021 147.644 65.4877V105.549H126.653V0Z" fill="black"/>
-        <path d="M89.8189 108.638C130.903 108.638 121.742 188.396 65.3906 188.396C8.06742 188.396 45.959 108.638 89.8189 108.638ZM72.4693 156.276C80.7971 156.276 88.2921 135.333 80.2419 135.333C73.4408 135.333 64.2802 156.276 72.4693 156.276Z" fill="black"/>
-        <path d="M89.8189 108.638C130.903 108.638 121.742 188.396 65.3906 188.396C8.06742 188.396 45.959 108.638 89.8189 108.638ZM72.4693 156.276C80.7971 156.276 88.2921 135.333 80.2419 135.333C73.4408 135.333 64.2802 156.276 72.4693 156.276Z" fill="#B00000"/>
-      </svg>
-      <p class="home__tagline">Small tools. Entirely client-side.</p>
-    </div>
+    <a class="tile bento-tile" href="https://thereisfarq.github.io/bento/">
+      <span class="product-title">Bento</span>
+      <span class="product-copy">
+        <span class="product-description">Instant photo grids. No cropping, nothing uploaded.</span>
+        <span class="product-action">Open tool ↗</span>
+      </span>
+    </a>
 
-    <nav class="home__levels" aria-label="Tools">
-      <a class="home__level" href="https://thereisfarq.github.io/bento/">
-        <span class="home__level-title">Bento</span>
-        <span class="home__level-sub">Instant photo grids. No cropping, nothing uploaded.</span>
-      </a>
-      <a class="home__level" href="https://thereisfarq.github.io/morph/">
-        <span class="home__level-title">Morph</span>
-        <span class="home__level-sub">Convert images or PDFs into print-ready files.</span>
-      </a>
-      <a class="home__level" href="https://thereisfarq.github.io/color/">
-        <span class="home__level-title">&lt;Color&gt;</span>
-        <span class="home__level-sub">Train your eye on RGB and Hex codes.</span>
-      </a>
-      <a class="home__level" href="https://thereisfarq.github.io/typedup/">
-        <span class="home__level-title">TypedUp</span>
-        <span class="home__level-sub">Guess the font in a minimal type game.</span>
-      </a>
-    </nav>
-  </div>
+    <a class="tile morph-tile" href="https://thereisfarq.github.io/morph/">
+      <span class="product-title">Morph</span>
+      <span class="product-copy">
+        <span class="product-description">Convert images or PDFs into print-ready files.</span>
+        <span class="product-action">Open tool ↗</span>
+      </span>
+    </a>
 
-  <div class="home__footer">
-    <a href="https://www.thereisfarq.com" target="_blank" rel="noopener noreferrer">An thereisfarq Initiative</a>
-  </div>
-</div>
+    <a class="tile" href="https://thereisfarq.github.io/color/">
+      <span class="product-title">&lt;Color&gt;</span>
+      <span class="product-copy">
+        <span class="product-description">Train your eye on RGB and Hex codes.</span>
+        <span class="product-action">Open tool ↗</span>
+      </span>
+    </a>
 
+    <a class="tile" href="https://thereisfarq.github.io/typedup/">
+      <span class="product-title">TypedUp</span>
+      <span class="product-copy">
+        <span class="product-description">Guess the font in a minimal type game.</span>
+        <span class="product-action">Open tool ↗</span>
+      </span>
+    </a>
+  </main>
 </body>
 </html>
