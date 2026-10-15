@@ -223,7 +223,7 @@
   }
   function findDifference(idx){
     if(roundLocked||found.has(idx)||!current.diffIndices.includes(idx))return;
-    found.add(idx);score+=hintUsed?8:10;streak++;
+    found.add(idx);score+=hintUsed?5:10;streak++;
     document.getElementById('endlessScore').textContent=score;
     document.getElementById('endlessStreak').textContent=streak+'×';
     document.getElementById('endlessFound').textContent=found.size+'/5';
@@ -237,7 +237,7 @@
       roundLocked=true;nextButton.disabled=false;nextButton.textContent='Next scene ↗';
       document.getElementById('differenceTitle').innerHTML='All found<span>!</span>';
       hintText.innerHTML='<strong>Five for five.</strong> New scene, new details — keep going.';
-      showToast('Round '+round+' cleared · +'+(hintUsed?40:50)+' points');
+      showToast('Round '+round+' cleared · +'+(hintUsed?25:50)+' points');
     }
   }
   function showToast(message){
@@ -252,7 +252,7 @@
     const svg=pair.querySelector('[data-side="right"]');
     const target=svg.querySelector('[data-target="'+idx+'"]');
     if(target){target.style.stroke='rgba(255,255,255,.8)';target.style.strokeDasharray='5 5';target.setAttribute('r','38');}
-    hintText.innerHTML='Hint: inspect the area around <strong>'+Math.round(o.x/600*100)+'% across</strong> the scene. Points are halved this round.';
+    hintText.innerHTML='Hint: inspect the area around <strong>'+Math.round(o.x/600*100)+'% across</strong> the scene. Points are halved for this find.';
     hintButton.disabled=true;hintButton.textContent='Hint used';
   }
   function launch(){
@@ -286,7 +286,7 @@
 <div class="difference-overlay" id="differenceOverlay" role="dialog" aria-modal="true" aria-labelledby="differenceTitle" aria-hidden="true">
   <header class="difference-top">
     <div class="difference-brand"><span class="difference-mark">≠</span><span><strong>The Difference Game</strong><small>thereisfarq / notice what others miss</small></span></div>
-    <div class="difference-controls"><button class="game-icon-btn fullscreen-label" id="fullscreenGame" type="button" title="Toggle browser fullscreen">⛶ <span class="fullscreen-label">Fullscreen</span></button><button class="game-icon-btn close-game" id="closeGame" type="button" aria-label="Close game" title="Close game">×</button></div>
+    <div class="difference-controls"><button class="game-icon-btn" id="fullscreenGame" type="button" title="Toggle browser fullscreen">⛶ <span class="fullscreen-label">Fullscreen</span></button><button class="game-icon-btn close-game" id="closeGame" type="button" aria-label="Close game" title="Close game">×</button></div>
   </header>
   <div class="difference-hud" aria-label="Game stats">
     <div class="hud-item"><small>Round</small><strong id="endlessRound">01</strong></div><span class="hud-divider"></span>
