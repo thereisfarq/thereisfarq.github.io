@@ -154,6 +154,7 @@
   }
   choiceButtons.forEach((button)=>button.addEventListener('click',()=>choose(Number(button.dataset.choice))));
   nextButton.addEventListener('click',()=>{
+    if(finished){round=1;score=0;resetButton.textContent='Start over';prepareRound();return}
     if(!answered)return;
     if(round>=5){
       finished=true;
@@ -163,14 +164,13 @@
       feedback.className='game-feedback good';
       feedback.textContent=score>=4?'Sharp eye — '+score+'/5. You notice the details that make interfaces feel finished.':score>=3?'Nice work — '+score+'/5. Look for rhythm in spacing, not just alignment.':'You scored '+score+'/5. Try again and focus on consistent padding and repeatable gaps.';
       nextButton.disabled=false;nextButton.textContent='Play again';
-      nextButton.onclick=()=>{round=1;score=0;nextButton.onclick=null;prepareRound()};
       resetButton.textContent='Play again';
       document.querySelector('.game-foot span:last-child').textContent=score+'/5';
       return;
     }
     round++;prepareRound();
   });
-  resetButton.addEventListener('click',()=>{round=1;score=0;nextButton.onclick=null;resetButton.textContent='Start over';prepareRound()});
+  resetButton.addEventListener('click',()=>{round=1;score=0;resetButton.textContent='Start over';prepareRound()});
   prepareRound();
 })();
 </script>
