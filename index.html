@@ -12,7 +12,37 @@
 <title>Farq Outpost</title>
 <style>
 :root{--bg:#30202a;--shell:#412833;--panel:#523743;--panel-hi:#5d414e;--fg:#fff;--muted:#d7bfc5;--line:#e5c7ca66;--line-strong:#e5c7ca;--accent:#e5c7ca;--ink:#412833;--r:10px;--font:"Inter Tight",Arial,sans-serif;--ease:180ms cubic-bezier(.2,.7,.2,1)}
-*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;min-height:100vh;background:var(--bg);color:var(--fg);font:14px/1.45 var(--font);-webkit-font-smoothing:antialiased}button,a{font:inherit}a{color:inherit;text-decoration:none}button{color:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;min-height:100vh;background:var(--bg);color:var(--fg);font:14px/1.45 var(--font);-webkit-font-smoothing:antialiased}
+/* Subtle cutting-mat workshop surface: low-contrast grid, angle guides and edge ticks. */
+html{
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(#e5c7ca08 1px,transparent 1px),
+    linear-gradient(90deg,#e5c7ca08 1px,transparent 1px),
+    linear-gradient(#e5c7ca0b 1px,transparent 1px),
+    linear-gradient(90deg,#e5c7ca0b 1px,transparent 1px);
+  background-size:20px 20px,20px 20px,100px 100px,100px 100px;
+  background-position:center center;
+}
+body{
+  background-color:transparent;
+  background-image:
+    repeating-linear-gradient(0deg,transparent 0 39px,#e5c7ca08 39px 40px),
+    repeating-linear-gradient(90deg,transparent 0 39px,#e5c7ca08 39px 40px);
+  background-size:200px 200px;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.14;
+  background:
+    repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg 14deg,#e5c7ca20 14.1deg 14.35deg,transparent 14.45deg 15deg);
+  mask-image:linear-gradient(135deg,transparent 0 18%,#000 30% 70%,transparent 82%);
+}
+button,a{font:inherit}a{color:inherit;text-decoration:none}button{color:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}
 .app{min-height:100vh;display:grid;grid-template-columns:214px minmax(0,1fr);grid-template-rows:58px minmax(0,1fr);max-width:1800px;margin:0 auto;border-inline:1px solid #e5c7ca22}
 .topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;border-bottom:1px solid var(--line);background:var(--shell);position:sticky;top:0;z-index:10}
 .brand{display:flex;align-items:center;gap:11px;min-width:0}.brand img{width:120px;height:32px;object-fit:contain;object-position:left center;filter:brightness(0) invert(1)}.brand-divider{height:22px;width:1px;background:var(--line)}.brand-sub{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
