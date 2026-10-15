@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#412833">
 <link rel="icon" type="image/svg+xml" href="../stamp-logo.svg">
-<meta name="description" content="Stamp is a free, private logo toolkit. Stress-test logos, export asset kits, build secondary marks, and create proportion guidelines in your browser.">
+<meta name="description" content="Stamp is a free, private logo toolkit. Stress-test your identity and export production-ready logo assets in your browser.">
 <title>Stamp — logo toolkit by thereisfarq</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
 .landing-inner{width:100%;max-width:760px;margin:0 auto}
 .landing-mark{width:min(100%,230px);height:82px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center}
 .landing-mark img{display:block;width:100%;height:100%;object-fit:contain}
-.workflow-tabs{display:flex;gap:6px;width:100%;margin:0 auto 28px;padding:5px;border:1px solid #e5c7ca66;border-radius:8px;background:#523743}
+.workflow-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:100%;margin:0 auto 28px;padding:5px;border:1px solid #e5c7ca66;border-radius:8px;background:#523743}
 .workflow-tabs .tab{flex:1;min-width:0;min-height:64px;padding:10px 11px;border:0;border-radius:5px;display:flex;align-items:flex-start;gap:9px;background:transparent;color:#fff;text-align:left;transition:background .18s,color .18s}
 .workflow-tabs .tab:hover:not(.active){background:#e5c7ca16;transform:none}
 .workflow-tabs .tab.active{background:#e5c7ca;color:#412833;box-shadow:none}
@@ -71,13 +71,11 @@
     <nav class="tabs workflow-tabs" aria-label="Stamp tools">
       <button class="tab active" data-tab="stress"><span class="n">01</span><span><strong>Stress test</strong><small>Size, background &amp; contrast</small></span></button>
       <button class="tab" data-tab="export"><span class="n">02</span><span><strong>Export kit</strong><small>Production-ready files</small></span></button>
-      <button class="tab" data-tab="system"><span class="n">03</span><span><strong>Secondary marks</strong><small>Build a flexible logo family</small></span></button>
-      <button class="tab" data-tab="ratios"><span class="n">04</span><span><strong>Ratio lab</strong><small>Proportions &amp; guidelines</small></span></button>
     </nav>
     <div class="landing-copy">
       <p class="landing-kicker">A PRACTICAL TOOL FOR IDENTITY DESIGNERS</p>
       <h1 class="landing-title">Make your logo<br>work harder.</h1>
-      <p class="landing-tagline">Stress-test it at tiny sizes. Export a tidy asset kit. Build a family of secondary marks and proportion guidelines — without opening another app.</p>
+      <p class="landing-tagline">Check whether your logo holds up in the real world, then export a clean, consistent asset kit. Two focused tools for the parts of identity design that need repeatable checks.</p>
       <label class="print-upload" for="file">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
         <span class="print-upload-copy"><strong>Drop a logo to begin</strong><span>SVG, transparent PNG, JPG or WebP · processed on this device</span></span>
@@ -99,12 +97,12 @@
 <div class="group"><div class="sect">02 / Output sizes</div><div class="sizechips" id="exportSizes"><button class="chip" data-size="16">16</button><button class="chip" data-size="32">32</button><button class="chip" data-size="64">64</button><button class="chip" data-size="128">128</button><button class="chip active" data-size="256">256</button><button class="chip active" data-size="512">512</button><button class="chip" data-size="1024">1024</button><button class="chip" data-size="2048">2048</button></div><p class="statusline">Transparent PNGs at exact pixel sizes. Choose the variants and sizes you need.</p></div>
 <div class="group"><div class="sect">03 / Export</div><button class="btn full" id="downloadOriginalSvg" disabled>Download original SVG</button><p class="statusline">If your source is SVG, download the original vector file separately to preserve its exact paths.</p></div>
 </div>
-<div id="systemControls" class="view">
+<div id="systemControls" class="view" hidden>
 <div class="group"><div class="sect">01 / Select the symbol</div><p class="statusline" style="margin-top:0;margin-bottom:10px">Drag over the symbol or part of your uploaded logo. Your selection becomes the source for secondary marks.</p><button class="btn full" id="resetCrop">Reset selection</button></div>
 <div class="group"><div class="sect">02 / Secondary mark format</div><div class="shapeoptions"><button class="shapeopt active" data-shape="free">Free</button><button class="shapeopt" data-shape="circle">Roundel</button><button class="shapeopt" data-shape="square">Tile</button><button class="shapeopt" data-shape="pill">Pill</button></div><label class="field" for="systemTreatment">Mark color</label><select id="systemTreatment"><option value="original">Original</option><option value="black">Black</option><option value="white">White</option><option value="blush">Blush</option></select><label class="field" for="containerColor">Container color</label><select id="containerColor"><option value="none">Transparent</option><option value="#412833">Plum</option><option value="#e5c7ca">Blush</option><option value="#ffffff">White</option><option value="#111111">Black</option></select><label class="field" for="padding">Breathing room</label><input id="padding" type="range" min="4" max="35" value="18" style="width:100%;accent-color:var(--accent)"><div class="row" style="margin-top:12px"><button class="btn" id="downloadSecondary">Export secondary PNG</button><button class="btn primary" id="downloadSquare">Export 1024²</button></div></div>
 <div class="systemActions"><button class="btn primary full" id="downloadSystemKit">Download full secondary kit (.zip)</button></div><div class="notice">A designer-led secondary-mark workflow: select a symbol or monogram, trim empty space, choose a container, then export a reusable family at five sizes. Stamp keeps symbol selection in your hands.</div>
 </div>
-<div id="ratiosControls" class="view">
+<div id="ratiosControls" class="view" hidden>
 <div class="group"><div class="sect">01 / Compare a proportion</div><p class="statusline" style="margin-top:0">Choose a reference ratio to compare your visible logo bounds against a familiar proportion. The logo itself is never stretched.</p><div class="ratiogrid" id="ratioChoices"></div></div>
 <div class="group"><div class="sect">02 / Guide overlays</div><label class="check"><input id="ratioShowClear" type="checkbox" checked> Show clear-space margin</label><label class="check" style="margin-top:8px"><input id="ratioShowGrid" type="checkbox" checked> Show ratio construction lines</label><label class="field" for="ratioClear">Clear space</label><select id="ratioClear"><option value="0.1">10% of mark width</option><option value="0.15">15% of mark width</option><option value="0.2">20% of mark width</option><option value="0.25">25% of mark width</option></select></div>
 <div class="group"><div class="sect">03 / Guidelines</div><button class="btn primary full" id="downloadRatioReport">Export proportion guidelines (.txt)</button><button class="btn full" id="downloadRatioBoard" style="margin-top:7px">Export ratio board (PNG)</button><p class="sectionNote">Ratios are reference frameworks, not proof of quality or a universal rule. Use the nearest ratio as a design rationale only when it genuinely supports the mark.</p></div>
@@ -121,11 +119,11 @@
 <div id="exportEmpty" class="previewbg"><div class="empty"><div class="symbol">↗</div><strong>Your asset kit starts here.</strong><p>Upload the primary logo, select color variants and pixel sizes, then export a batch of production-ready PNGs.</p></div></div>
 <div id="exportResults" hidden><div class="variantgrid" id="variantgrid"></div><div class="notice">PNG files keep transparent backgrounds. For white marks, preview against the checkerboard. Raster exports are generated in your browser.</div><button class="btn primary full" id="exportBatch" style="margin-top:14px">Download PNG kit (.zip)</button></div>
 </div>
-<div id="ratiosView" class="view">
+<div id="ratiosView" class="view" hidden>
 <div id="ratiosEmpty" class="previewbg"><div class="empty"><div class="symbol">φ</div><strong>Give the geometry a reason.</strong><p>Compare your logo’s visible bounds against common ratios, inspect clear space, and export practical guidelines. No ratio is treated as a magic formula.</p></div></div>
 <div id="ratiosResults" hidden><canvas id="ratioCanvas" class="guidecanvas" width="1200" height="760"></canvas><div class="ratioMetric"><div class="metric"><small>Visible bounds</small><b id="actualRatio">—</b></div><div class="metric"><small>Selected reference</small><b id="targetRatio">—</b></div><div class="metric"><small>Difference</small><b id="ratioDelta">—</b></div></div><div class="ratioReport" id="ratioGuideline"></div><div class="minihead"><strong>Compare other references</strong><span>Tap a ratio to switch</span></div><div class="ratiogrid" id="ratioResultsChoices"></div></div>
 </div>
-<div id="systemView" class="view">
+<div id="systemView" class="view" hidden>
 <div id="systemEmpty" class="previewbg"><div class="empty"><div class="symbol">⌗</div><strong>Build a secondary mark.</strong><p>Upload a logo, select the symbol or detail you want to reuse, and turn it into a flexible secondary asset.</p></div></div>
 <div id="systemResults" hidden class="systemgrid"><div><div class="sect">Select source area</div><div class="cropwrap"><canvas id="cropCanvas" width="720" height="480"></canvas></div><p class="statusline" id="cropStatus">Drag on the artwork to select a symbol.</p></div><div><div class="sect">Secondary mark preview</div><div class="systempreview"><canvas id="secondaryCanvas" width="640" height="640"></canvas></div><div class="row" style="margin-top:10px"><button class="btn" id="systemBgLight">Light preview</button><button class="btn" id="systemBgDark">Dark preview</button></div></div></div>
 </div>
