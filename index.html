@@ -34,13 +34,22 @@
 @media(max-width:600px){.app{display:flex;flex-direction:column}.topbar{height:54px;padding:0 13px;position:sticky}.brand img{width:105px;height:28px}.brand-sub,.brand-divider,.local-pill{display:none}.top-link{font-size:10px;padding:7px 9px}.sidebar{order:2;border-right:0;border-top:1px solid var(--line);padding:8px 12px;position:sticky;bottom:0;z-index:8;display:block}.side-nav{display:flex;justify-content:space-around;gap:4px}.side-nav a,.side-nav button{flex:1;display:flex;flex-direction:column;gap:3px;padding:7px 3px;font-size:9px}.side-nav .nav-text{display:block}.nav-icon{width:18px;height:18px;flex-basis:18px}.main{order:1;display:flex;flex-direction:column;padding:20px 13px 28px;gap:20px}.canvas,.side-panel{width:100%}.crumbs{margin-bottom:16px}.hero{margin-bottom:18px}.hero h1{font-size:39px}.hero-copy{font-size:12px}.hero-stats{gap:5px}.stat-chip{font-size:9px;padding:6px 7px}.section-head{margin-top:22px}.tool-grid{gap:7px}.tool-card{min-height:198px;border-radius:8px}.card-preview{height:89px;padding:9px}.card-info{padding:10px}.card-title{font-size:14px}.card-description{font-size:10px}.card-meta{flex-wrap:wrap}.tag{font-size:8px;padding:3px 5px}.preview-bento{grid-template-rows:28px 28px;gap:4px}.preview-type strong{font-size:42px}.preview-stamp{gap:8px}.stamp-mark{width:49px;height:49px;font-size:25px}.stamp-lines span{width:49px}.stamp-lines span:nth-child(2){width:38px}.stamp-lines span:nth-child(3){width:44px}.bottom-links{grid-template-columns:1fr}.side-panel{border-radius:9px}.choices{gap:7px}.mock-ui{min-height:118px;padding:10px}.mock-ui.unbalanced{padding:5px 14px 11px 7px}.footer{align-items:flex-start;flex-direction:column}}
 @media(max-width:370px){.tool-grid{grid-template-columns:1fr}.tool-card{min-height:205px}.card-preview{height:105px}.hero h1{font-size:35px}.choices{gap:5px}.choice{padding:5px}.mock-ui{min-height:106px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* Endless Difference Game */
+.game-teaser{position:sticky;top:76px}.teaser-art{height:160px;position:relative;display:flex;align-items:center;justify-content:center;gap:8px;overflow:hidden;background:radial-gradient(ellipse at 50% 110%,#8b5a6c55,transparent 65%),#38242f;border-bottom:1px solid var(--line)}.teaser-tile{width:42%;height:104px;border:1px solid #e5c7ca55;border-radius:7px;background:#e8d8ce;position:relative;overflow:hidden;box-shadow:0 8px 25px #140b1044}.teaser-tile span,.teaser-tile i,.teaser-tile b,.teaser-tile em{position:absolute;display:block}.teaser-tile span{width:32px;height:32px;border-radius:50%;background:#a55c72;left:13px;top:13px}.teaser-tile i{width:37px;height:25px;background:#d2a75f;right:12px;top:19px;border-radius:3px;transform:rotate(-8deg)}.teaser-tile b{width:49px;height:15px;background:#4f6e65;left:13px;bottom:17px;border-radius:3px}.teaser-tile em{width:17px;height:17px;background:#73556c;right:18px;bottom:16px;border-radius:50%}.tile-b span{background:#a55c72;left:18px}.tile-b i{transform:rotate(9deg);background:#d2a75f}.tile-b b{background:#4f6e65;left:19px}.tile-b em{background:#e7bd70;right:12px}.teaser-spark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-8deg);width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-size:19px;font-weight:800;box-shadow:0 3px 15px #1d1018aa}.teaser-accent{color:var(--accent)}.teaser-stats{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 16px}.teaser-stats span{border:1px solid var(--line);border-radius:5px;padding:7px 8px;color:var(--muted);font-size:9px}.teaser-stats b{color:#fff;font-size:11px;margin-right:3px}.launch-game{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 14px;border:1px solid var(--accent);border-radius:6px;background:var(--accent);color:var(--ink);font-size:12px;font-weight:800;transition:transform var(--ease),filter var(--ease)}.launch-game:hover{transform:translateY(-1px);filter:brightness(1.06)}.teaser-note{font-size:9px;color:var(--muted);text-align:center;margin:11px 0 0}
+.difference-overlay{position:fixed;inset:0;z-index:1000;background:#261821;color:var(--fg);display:none;flex-direction:column;min-height:100vh;min-height:100dvh;overflow:hidden}.difference-overlay.is-open{display:flex}.difference-top{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px clamp(14px,3vw,36px);background:var(--shell);border-bottom:1px solid var(--line);flex-shrink:0}.difference-brand{display:flex;align-items:center;gap:11px;min-width:0}.difference-mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-size:21px;font-weight:800}.difference-brand strong{font-size:13px;display:block;letter-spacing:-.02em}.difference-brand small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.difference-controls{display:flex;align-items:center;gap:8px}.game-icon-btn{border:1px solid var(--line);border-radius:6px;background:transparent;color:#fff;min-height:36px;padding:8px 11px;font-size:11px;white-space:nowrap}.game-icon-btn:hover{border-color:var(--accent);background:#e5c7ca0d}.game-icon-btn.close-game{font-size:18px;line-height:1;padding:7px 11px}.difference-hud{display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,36px);padding:12px 16px;border-bottom:1px solid #e5c7ca22;background:#2e1e28;flex-shrink:0}.hud-item{text-align:center;min-width:48px}.hud-item small{display:block;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}.hud-item strong{display:block;font-size:19px;line-height:1.2;font-weight:700;font-variant-numeric:tabular-nums}.hud-item .hud-infinity{font-size:23px;color:var(--accent)}.hud-divider{height:28px;width:1px;background:var(--line)}.streak-hot{color:#ffd49b}.difference-progress{height:3px;background:#e5c7ca18;flex-shrink:0}.difference-progress span{display:block;height:100%;width:0;background:var(--accent);transition:width 180ms ease}.difference-main{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(12px,2vh,24px) clamp(12px,3vw,36px);overflow:auto}.difference-prompt{width:min(100%,1100px);display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:13px}.difference-prompt h1{font-size:clamp(22px,3vw,34px);line-height:1;letter-spacing:-.055em;margin:0}.difference-prompt h1 span{color:var(--accent)}.difference-prompt p{margin:6px 0 0;color:var(--muted);font-size:11px}.difference-status{font-size:10px;color:var(--muted);white-space:nowrap}.scene-pair{width:min(100%,1100px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(8px,1.6vw,18px)}.scene-card{min-width:0;border:1px solid #e5c7ca44;background:#38242f;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 10px 32px #140b1030}.scene-card-head{height:35px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#412833;border-bottom:1px solid #e5c7ca22;color:var(--muted);font-size:10px}.scene-card-head b{font-size:10px;letter-spacing:.1em;color:#fff}.scene-svg{display:block;width:100%;height:auto;aspect-ratio:600/420;touch-action:manipulation;cursor:crosshair}.scene-svg .hit-target{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer}.scene-svg .hit-target:focus-visible{stroke:#fff;outline:none}.scene-svg .found-ring{fill:#e5c7ca25;stroke:#e5c7ca;stroke-width:4;pointer-events:none;filter:drop-shadow(0 0 4px #261821)}.scene-svg .found-number{font-size:18px;font-weight:800;fill:#412833;text-anchor:middle;dominant-baseline:central;pointer-events:none}.scene-svg .scene-label{font-size:11px;letter-spacing:2px;font-weight:700}.scene-svg .tiny-copy{font-size:7px;letter-spacing:1px}.scene-hint{min-height:28px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:11px;margin-top:10px}.scene-hint strong{color:var(--accent);font-weight:700}.difference-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;width:min(100%,1100px);padding:10px 0 0}.difference-help{font-size:10px;color:var(--muted);line-height:1.5}.difference-bottom-actions{display:flex;gap:8px}.difference-bottom .game-icon-btn.primary{background:var(--accent);border-color:var(--accent);color:var(--ink);font-weight:800}.difference-bottom .game-icon-btn:disabled{opacity:.4;cursor:not-allowed}.round-toast{position:fixed;left:50%;top:50%;z-index:3;transform:translate(-50%,-50%) scale(.96);opacity:0;pointer-events:none;background:var(--accent);color:var(--ink);padding:13px 18px;border-radius:9px;font-size:13px;font-weight:800;box-shadow:0 10px 50px #140b1088;transition:opacity 160ms ease,transform 160ms ease}.round-toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.difference-overlay:fullscreen{width:100%;height:100%;background:#261821}.difference-overlay:fullscreen .difference-main{padding-top:12px;padding-bottom:12px}
+@media(max-width:700px){.game-teaser{position:static}.teaser-art{height:140px}.difference-top{min-height:55px;padding:9px 12px}.difference-brand{gap:8px}.difference-mark{width:30px;height:30px}.difference-brand strong{font-size:11px}.difference-brand small{font-size:9px}.game-icon-btn{min-height:33px;padding:7px 9px;font-size:10px}.difference-hud{padding:8px 10px;gap:clamp(8px,4vw,22px)}.hud-item strong{font-size:17px}.hud-item small{font-size:8px}.difference-main{justify-content:flex-start;padding:14px 10px 10px;overflow-y:auto}.difference-prompt{align-items:start;margin-bottom:10px}.difference-prompt h1{font-size:25px}.difference-prompt p{font-size:10px;max-width:270px}.difference-status{font-size:9px;text-align:right}.scene-pair{gap:6px}.scene-card{border-radius:7px}.scene-card-head{height:29px;padding:0 7px;font-size:9px}.scene-card-head b{font-size:9px}.scene-svg{width:100%;height:auto}.scene-hint{font-size:10px;min-height:34px;margin-top:5px}.difference-bottom{align-items:flex-end;padding-top:6px}.difference-help{max-width:45%;font-size:9px}.difference-bottom-actions{gap:5px}.difference-bottom .game-icon-btn{padding:8px 9px}.difference-bottom .hide-mobile{display:none}}
+@media(max-width:380px){.difference-brand small{display:none}.difference-controls{gap:5px}.difference-controls .fullscreen-label{display:none}.difference-prompt h1{font-size:22px}.difference-prompt p{font-size:9px}.difference-status{max-width:90px;white-space:normal}.scene-card-head{padding:0 5px}.scene-svg{min-height:0}.difference-bottom{gap:6px}.difference-help{max-width:38%}}
+@media(max-height:650px) and (min-width:701px){.difference-top{min-height:52px}.difference-hud{padding:7px 12px}.difference-main{padding-top:8px;padding-bottom:8px}.difference-prompt{margin-bottom:8px}.difference-prompt h1{font-size:25px}.scene-card-head{height:28px}.scene-pair{width:min(100%,920px)}.difference-bottom{padding-top:5px}.scene-hint{min-height:20px;margin-top:4px}}
+@media(prefers-reduced-motion:reduce){.difference-overlay *{transition:none!important;animation:none!important}}
+
 </style>
 </head>
 <body>
 <div class="app">
 <header class="topbar">
   <a class="brand" href="#home" aria-label="thereisfarq home"><img src="./wordk.svg" alt="thereisfarq"><span class="brand-divider"></span><span class="brand-sub">Design tools</span></a>
-  <div class="top-actions"><span class="local-pill"><span class="dot"></span>Made for the details</span><a class="top-link" href="#play">Play a quick round <span aria-hidden="true">↗</span></a></div>
+  <div class="top-actions"><span class="local-pill"><span class="dot"></span>Made for the details</span><a class="top-link" href="#play" id="topLaunch">Play the game <span aria-hidden="true">↗</span></a></div>
 </header>
 <aside class="sidebar" aria-label="Main navigation">
   <div><div class="side-label">Workspace</div><nav class="side-nav">
@@ -91,88 +100,209 @@
   </div>
   <footer class="footer"><span>Made with an unreasonable amount of care.</span><span><a href="https://www.thereisfarq.in" target="_blank" rel="noopener noreferrer">thereisfarq.in ↗</a></span></footer>
 </section>
-<aside class="side-panel" id="play" aria-label="Interactive design challenge">
-  <div class="side-panel-head"><h2>Playground</h2><span class="panel-kicker">Design eye / 01</span></div>
+<aside class="side-panel game-teaser" id="play" aria-label="Spot the difference game">
+  <div class="side-panel-head"><h2>The Difference Game</h2><span class="panel-kicker">Endless mode</span></div>
+  <div class="teaser-art" aria-hidden="true"><div class="teaser-tile tile-a"><span></span><i></i><b></b><em></em></div><div class="teaser-tile tile-b"><span></span><i></i><b></b><em></em></div><div class="teaser-spark">≠</div></div>
   <div class="game-body">
-    <div class="game-eyebrow"><span class="dot"></span> 30-second design break</div>
-    <h2 class="game-title">Spot the spacing.</h2>
-    <p class="game-description">One layout uses a consistent spacing system. The other doesn't. Pick the one that feels more considered.</p>
-    <div class="game-progress"><span id="roundLabel">ROUND 01 / 05</span><span><b id="scoreLabel">0</b> points</span></div>
-    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="choices" id="choices">
-      <button class="choice" type="button" data-choice="0" aria-label="Choose layout A"><span class="choice-label"><b>Layout A</b><span>A</span></span><span class="mock-ui"><span class="mock-head"></span><span class="mock-row"><span class="mock-avatar"></span><span class="mock-lines"><span></span><span></span></span></span><span class="mock-button"></span></span></button>
-      <button class="choice" type="button" data-choice="1" aria-label="Choose layout B"><span class="choice-label"><b>Layout B</b><span>B</span></span><span class="mock-ui unbalanced"><span class="mock-head"></span><span class="mock-row"><span class="mock-avatar"></span><span class="mock-lines"><span></span><span></span></span></span><span class="mock-button"></span></span></button>
-    </div>
-    <p class="game-feedback" id="gameFeedback" aria-live="polite">Look at the outer padding, the gaps, and the button alignment.</p>
-    <div class="game-action"><button type="button" id="resetGame">Start over</button><button type="button" class="primary" id="nextRound" disabled>Choose a layout</button></div>
+    <div class="game-eyebrow"><span class="dot"></span> A game about noticing</div>
+    <h2 class="game-title">Same same.<br><span class="teaser-accent">But different.</span></h2>
+    <p class="game-description">Two scenes. A handful of tiny changes. Find every difference before your streak cools off. New compositions, new details, no final round.</p>
+    <div class="teaser-stats"><span><b>∞</b> rounds</span><span><b>5</b> differences per scene</span><span><b>0</b> repeats by design</span></div>
+    <button type="button" class="launch-game" id="launchGame">Play the Difference Game <span aria-hidden="true">↗</span></button>
+    <p class="teaser-note">Built for your eyes, not your reflexes.</p>
   </div>
-  <div class="game-foot"><span>Train your eye, not a score.</span><span>01 — 05</span></div>
 </aside>
 </main>
 </div>
 <script>
 (function(){
-  const choiceButtons=[...document.querySelectorAll('.choice')];
-  const feedback=document.getElementById('gameFeedback');
-  const nextButton=document.getElementById('nextRound');
-  const resetButton=document.getElementById('resetGame');
-  const roundLabel=document.getElementById('roundLabel');
-  const scoreLabel=document.getElementById('scoreLabel');
-  const progressFill=document.getElementById('progressFill');
-  let round=1,score=0,correctChoice=1,answered=false,finished=false;
-  function prepareRound(){
-    answered=false;finished=false;
-    correctChoice=Math.random()<.5?0:1;
-    choiceButtons.forEach((button,index)=>{
-      button.disabled=false;button.classList.remove('selected-good','selected-bad');
-      const ui=button.querySelector('.mock-ui');
-      ui.classList.toggle('unbalanced',index!==correctChoice);
-      button.querySelector('.choice-label b').textContent='Layout '+(index===0?'A':'B');
-      button.querySelector('.choice-label span').textContent=index===0?'A':'B';
-      button.setAttribute('aria-label','Choose layout '+(index===0?'A':'B'));
-    });
-    roundLabel.textContent='ROUND '+String(round).padStart(2,'0')+' / 05';
-    scoreLabel.textContent=score;
-    progressFill.style.width=((round-1)/5*100)+'%';
-    feedback.className='game-feedback';
-    feedback.textContent='Look at the outer padding, the gaps, and the button alignment.';
-    nextButton.disabled=true;nextButton.textContent='Choose a layout';
-    document.querySelector('.game-foot span:last-child').textContent=String(round).padStart(2,'0')+' — 05';
+  const overlay=document.getElementById('differenceOverlay');
+  const launchButtons=[document.getElementById('launchGame'),document.getElementById('topLaunch')];
+  const closeButton=document.getElementById('closeGame');
+  const fullscreenButton=document.getElementById('fullscreenGame');
+  const pair=document.getElementById('scenePair');
+  const hintButton=document.getElementById('hintDifference');
+  const nextButton=document.getElementById('nextScene');
+  const hintText=document.getElementById('sceneHint');
+  const toast=document.getElementById('roundToast');
+  const palettes=[
+    {name:'Citrus Studio',bg:'#f2e7d8',ink:'#352e3c',colors:['#e66f51','#e8b84e','#557b70','#9a7194','#f8f3e9']},
+    {name:'Soft Signals',bg:'#e6e7df',ink:'#273b3a',colors:['#c85b50','#e6b96b','#608d83','#7187ad','#f8f4e9']},
+    {name:'Night Market',bg:'#302b43',ink:'#f6e8d2',colors:['#f28b62','#e9c46a','#7cb5a1','#c58bb9','#f7f0df']},
+    {name:'Paper Things',bg:'#f3eee4',ink:'#413b35',colors:['#a64f47','#d3a65d','#647b63','#7389a1','#ded2c0']},
+    {name:'After Hours',bg:'#242d36',ink:'#f2e6dc',colors:['#e37e66','#e8bd67','#82b6a3','#b59bd3','#f4e7d6']},
+    {name:'Playground',bg:'#e9dfe9',ink:'#423147',colors:['#d75d83','#e5ae49','#5c8f84','#7a79ba','#fff7ee']},
+    {name:'Field Notes',bg:'#e8e5d4',ink:'#3a4034',colors:['#c45c42','#d5a54d','#5f7c57','#718e9d','#f7f0dc']},
+    {name:'Blue Hour',bg:'#dce5ed',ink:'#28364c',colors:['#db795f','#e3b55d','#5a8b93','#7e75a9','#f5f0e5']}
+  ];
+  const positions=[
+    [82,125],[202,125],[322,125],[442,125],
+    [82,230],[202,230],[322,230],[442,230],
+    [82,335],[202,335],[322,335],[442,335]
+  ];
+  const shapeTypes=['circle','square','triangle','diamond','ring','pill','star'];
+  const sceneNames=['Objects with opinions','A very small studio','Colour, out of line','The organised chaos','A study in almost'];
+  let round=0,score=0,streak=0,found=new Set(),targets=[],current=null,hintUsed=false,roundLocked=false,toastTimer=null,previousScene=-1;
+  const rand=(n)=>Math.floor(Math.random()*n);
+  const pick=(a)=>a[rand(a.length)];
+  const shuffle=(a)=>{for(let i=a.length-1;i>0;i--){const j=rand(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+  const esc=(s)=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function objectSvg(o,fill){
+    const x=o.x,y=o.y,s=o.size,r=o.rot||0,stroke=o.stroke||'none',sw=o.strokeWidth||0;
+    const transform='translate('+x+' '+y+') rotate('+r+')';
+    if(o.shape==='circle')return '<g transform="'+transform+'"><circle r="'+s*.56+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>'+(o.detail?'<circle r="'+s*.22+'" fill="'+o.detail+'"/>':'')+'</g>';
+    if(o.shape==='square')return '<g transform="'+transform+'"><rect x="'+(-s*.52)+'" y="'+(-s*.52)+'" width="'+(s*1.04)+'" height="'+(s*1.04)+'" rx="'+(o.round?8:1)+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>'+(o.detail?'<path d="M '+(-s*.24)+' 0 H '+(s*.24)+'" stroke="'+o.detail+'" stroke-width="3" stroke-linecap="round"/>':'')+'</g>';
+    if(o.shape==='triangle')return '<g transform="'+transform+'"><path d="M 0 '+(-s*.64)+' L '+(s*.62)+' '+(s*.48)+' L '+(-s*.62)+' '+(s*.48)+' Z" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>'+(o.detail?'<circle cy="'+(s*.12)+'" r="'+(s*.13)+'" fill="'+o.detail+'"/>':'')+'</g>';
+    if(o.shape==='diamond')return '<g transform="'+transform+'"><path d="M 0 '+(-s*.7)+' L '+(s*.62)+' 0 L 0 '+(s*.7)+' L '+(-s*.62)+' 0 Z" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>'+(o.detail?'<path d="M -5 0 H 5" stroke="'+o.detail+'" stroke-width="3"/>':'')+'</g>';
+    if(o.shape==='ring')return '<g transform="'+transform+'"><circle r="'+s*.54+'" fill="none" stroke="'+fill+'" stroke-width="'+Math.max(5,s*.24)+'"/>'+(o.detail?'<circle r="'+s*.15+'" fill="'+o.detail+'"/>':'')+'</g>';
+    if(o.shape==='pill')return '<g transform="'+transform+'"><rect x="'+(-s*.72)+'" y="'+(-s*.38)+'" width="'+(s*1.44)+'" height="'+(s*.76)+'" rx="'+(s*.38)+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>'+(o.detail?'<circle cx="'+(s*.3)+'" r="'+(s*.12)+'" fill="'+o.detail+'"/>':'')+'</g>';
+    return '<g transform="'+transform+'"><path d="M0 '+(-s*.7)+' L'+(s*.18)+' '+(-s*.2)+' L'+(s*.68)+' '+(-s*.2)+' L'+(s*.28)+' '+(s*.12)+' L'+(s*.42)+' '+(s*.62)+' L0 '+(s*.32)+' L'+(-s*.42)+' '+(s*.62)+' L'+(-s*.28)+' '+(s*.12)+' L'+(-s*.68)+' '+(-s*.2)+' L'+(-s*.18)+' '+(-s*.2)+' Z" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>'+(o.detail?'<circle r="'+(s*.12)+'" fill="'+o.detail+'"/>':'')+'</g>';
   }
-  function choose(index){
-    if(answered||finished)return;
-    answered=true;
-    choiceButtons.forEach((button,i)=>{
-      button.disabled=true;
-      if(i===correctChoice)button.classList.add('selected-good');
-      else if(i===index)button.classList.add('selected-bad');
+  function createScene(){
+    let paletteIndex=rand(palettes.length);if(paletteIndex===previousScene)paletteIndex=(paletteIndex+1+rand(palettes.length-1))%palettes.length;previousScene=paletteIndex;
+    const palette=palettes[paletteIndex],objects=[];
+    const chosenPositions=shuffle(positions.map((p,i)=>({p,i}))).slice(0,10).sort((a,b)=>a.i-b.i);
+    chosenPositions.forEach(({p,i},j)=>{
+      const x=p[0]+rand(21)-10,y=p[1]+rand(17)-8;
+      objects.push({id:j,x,y,baseX:x,baseY:y,shape:pick(shapeTypes),size:16+rand(12),rot:rand(50)-25,color:pick(palette.colors.slice(0,4)),detail:Math.random()<.55?pick(palette.colors.slice(0,4)):null,round:Math.random()<.5,stroke:Math.random()<.2?palette.ink:'none',strokeWidth:2});
     });
-    if(index===correctChoice){score++;feedback.className='game-feedback good';feedback.textContent='Good eye. The spacing is consistent, so the layout feels calmer and easier to scan.'}
-    else{feedback.className='game-feedback bad';feedback.textContent='Not quite. Look for even outer padding, repeatable gaps, and elements that line up. Consistency makes the layout feel intentional.'}
-    scoreLabel.textContent=score;progressFill.style.width=(round/5*100)+'%';
-    nextButton.disabled=false;nextButton.textContent=round===5?'See your result':'Next round';
+    const diffIndices=shuffle(objects.map((_,i)=>i)).slice(0,5);
+    const right=objects.map(o=>({...o}));
+    const changeNames=[];
+    diffIndices.forEach((idx,k)=>{
+      const o=right[idx],original=objects[idx];
+      const type=rand(5);
+      if(type===0){let c=pick(palette.colors.filter(c=>c!==o.color));o.color=c;changeNames.push('colour');}
+      else if(type===1){o.shape=shapeTypes[(shapeTypes.indexOf(o.shape)+1+rand(shapeTypes.length-1))%shapeTypes.length];changeNames.push('shape');}
+      else if(type===2){o.size=Math.max(12,Math.min(34,o.size+(Math.random()<.5?-1:1)*(7+rand(8))));changeNames.push('size');}
+      else if(type===3){o.rot=(o.rot+45+rand(90))%360;changeNames.push('angle');}
+      else{o.detail=o.detail?null:pick(palette.colors.filter(c=>c!==o.color));changeNames.push('detail');}
+    });
+    const label=pick(sceneNames);
+    return {palette,objects,right,diffIndices,label,changeNames};
   }
-  choiceButtons.forEach((button)=>button.addEventListener('click',()=>choose(Number(button.dataset.choice))));
-  nextButton.addEventListener('click',()=>{
-    if(finished){round=1;score=0;resetButton.textContent='Start over';prepareRound();return}
-    if(!answered)return;
-    if(round>=5){
-      finished=true;
-      roundLabel.textContent='SESSION COMPLETE';
-      progressFill.style.width='100%';
-      choiceButtons.forEach(b=>b.disabled=true);
-      feedback.className='game-feedback good';
-      feedback.textContent=score>=4?'Sharp eye — '+score+'/5. You notice the details that make interfaces feel finished.':score>=3?'Nice work — '+score+'/5. Look for rhythm in spacing, not just alignment.':'You scored '+score+'/5. Try again and focus on consistent padding and repeatable gaps.';
-      nextButton.disabled=false;nextButton.textContent='Play again';
-      resetButton.textContent='Play again';
-      document.querySelector('.game-foot span:last-child').textContent=score+'/5';
-      return;
+  function sceneSvg(scene,side){
+    const isRight=side==='right',list=isRight?scene.right:scene.objects;
+    const title=isRight?'Right — find the changes':'Left — original';
+    let s='<svg class="scene-svg" viewBox="0 0 600 420" role="img" aria-label="'+title+'" data-side="'+side+'" xmlns="http://www.w3.org/2000/svg">';
+    s+='<rect width="600" height="420" fill="'+scene.palette.bg+'"/>';
+    s+='<path d="M0 76 H600" stroke="'+scene.palette.ink+'" stroke-opacity=".18"/>';
+    s+='<text x="32" y="34" class="scene-label" fill="'+scene.palette.ink+'">'+esc(scene.palette.name.toUpperCase())+'</text>';
+    s+='<text x="32" y="56" class="tiny-copy" fill="'+scene.palette.ink+'" opacity=".7">'+esc(scene.label.toUpperCase())+'</text>';
+    s+='<circle cx="556" cy="34" r="10" fill="'+scene.palette.colors[0]+'"/><circle cx="556" cy="34" r="3" fill="'+scene.palette.bg+'"/>';
+    s+='<path d="M30 390 H570" stroke="'+scene.palette.ink+'" stroke-opacity=".2"/>';
+    s+='<text x="32" y="407" class="tiny-copy" fill="'+scene.palette.ink+'" opacity=".6">STUDY NO. '+String(round).padStart(3,'0')+'</text>';
+    s+='<text x="568" y="407" text-anchor="end" class="tiny-copy" fill="'+scene.palette.ink+'" opacity=".6">THEREISFARQ®</text>';
+    list.forEach(o=>{s+=objectSvg(o,o.color)});
+    if(isRight){
+      scene.diffIndices.forEach(idx=>{
+        const o=scene.objects[idx];
+        s+='<circle class="hit-target" tabindex="0" role="button" aria-label="Check for a difference" data-target="'+idx+'" cx="'+o.x+'" cy="'+o.y+'" r="34"/>';
+        if(found.has(idx))s+='<circle class="found-ring" cx="'+o.x+'" cy="'+o.y+'" r="25"/><text class="found-number" x="'+o.x+'" y="'+o.y+'">'+(scene.diffIndices.indexOf(idx)+1)+'</text>';
+      });
     }
-    round++;prepareRound();
+    s+='</svg>';
+    return s;
+  }
+  function renderScene(){
+    current=createScene();found=new Set();hintUsed=false;roundLocked=false;targets=current.diffIndices.slice();
+    document.getElementById('endlessRound').textContent=String(round).padStart(2,'0');
+    document.getElementById('endlessScore').textContent=score;
+    document.getElementById('endlessStreak').textContent=streak+'×';
+    document.getElementById('endlessFound').textContent='0/5';
+    document.getElementById('differenceStatus').textContent='0 of 5 found';
+    document.getElementById('differenceTitle').innerHTML='Look closer<span>.</span>';
+    document.getElementById('differenceProgress').style.width='0%';
+    document.querySelector('.scene-pair').innerHTML='<section class="scene-card"><div class="scene-card-head"><b>01 / ORIGINAL</b><span>Take it in</span></div>'+sceneSvg(current,'left')+'</section><section class="scene-card"><div class="scene-card-head"><b>02 / THE DIFFERENCE</b><span>Tap the changes</span></div>'+sceneSvg(current,'right')+'</section>';
+    hintText.innerHTML='Every round is a new composition. <strong>&nbsp;No timer. Just your eye.</strong>';
+    hintButton.disabled=false;hintButton.textContent='Give me a hint';nextButton.disabled=true;nextButton.textContent='Next scene ↗';
+    pair.querySelectorAll('.hit-target').forEach(el=>{
+      el.addEventListener('click',()=>findDifference(Number(el.dataset.target)));
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();findDifference(Number(el.dataset.target));}});
+    });
+  }
+  function findDifference(idx){
+    if(roundLocked||found.has(idx)||!current.diffIndices.includes(idx))return;
+    found.add(idx);score+=hintUsed?8:10;streak++;
+    document.getElementById('endlessScore').textContent=score;
+    document.getElementById('endlessStreak').textContent=streak+'×';
+    document.getElementById('endlessFound').textContent=found.size+'/5';
+    document.getElementById('differenceStatus').textContent=found.size+' of 5 found';
+    document.getElementById('differenceProgress').style.width=(found.size/5*100)+'%';
+    const svg=pair.querySelector('[data-side="right"]');
+    const target=svg.querySelector('[data-target="'+idx+'"]');
+    if(target){target.setAttribute('aria-label','Difference found');target.style.pointerEvents='none';target.insertAdjacentHTML('afterend','<circle class="found-ring" cx="'+current.objects[idx].x+'" cy="'+current.objects[idx].y+'" r="25"/><text class="found-number" x="'+current.objects[idx].x+'" y="'+current.objects[idx].y+'">'+found.size+'</text>');}
+    hintText.innerHTML='<strong>Nice catch.</strong> '+(5-found.size===0?'You found every difference.':' '+(5-found.size)+' '+((5-found.size)===1?'detail':'details')+' left to find.');
+    if(found.size===5){
+      roundLocked=true;nextButton.disabled=false;nextButton.textContent='Next scene ↗';
+      document.getElementById('differenceTitle').innerHTML='All found<span>!</span>';
+      hintText.innerHTML='<strong>Five for five.</strong> New scene, new details — keep going.';
+      showToast('Round '+round+' cleared · +'+(hintUsed?40:50)+' points');
+    }
+  }
+  function showToast(message){
+    toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),1150);
+  }
+  function giveHint(){
+    if(roundLocked||hintUsed)return;
+    const missing=current.diffIndices.filter(i=>!found.has(i));
+    if(!missing.length)return;
+    hintUsed=true;streak=0;document.getElementById('endlessStreak').textContent='0×';
+    const idx=missing[0],o=current.objects[idx];
+    const svg=pair.querySelector('[data-side="right"]');
+    const target=svg.querySelector('[data-target="'+idx+'"]');
+    if(target){target.style.stroke='rgba(255,255,255,.8)';target.style.strokeDasharray='5 5';target.setAttribute('r','38');}
+    hintText.innerHTML='Hint: inspect the area around <strong>'+Math.round(o.x/600*100)+'% across</strong> the scene. Points are halved this round.';
+    hintButton.disabled=true;hintButton.textContent='Hint used';
+  }
+  function launch(){
+    overlay.classList.add('is-open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    if(!round){round=1;score=0;streak=0;renderScene();}
+    closeButton.focus();
+  }
+  async function close(){
+    overlay.classList.remove('is-open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';
+    if(document.fullscreenElement){try{await document.exitFullscreen()}catch(e){}}
+  }
+  launchButtons.forEach(b=>{if(b)b.addEventListener('click',e=>{e.preventDefault();launch()})});
+  closeButton.addEventListener('click',close);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('is-open'))close()});
+  fullscreenButton.addEventListener('click',async()=>{
+    try{if(!document.fullscreenElement){await overlay.requestFullscreen();fullscreenButton.innerHTML='⛶ <span class="fullscreen-label">Exit fullscreen</span>'}else{await document.exitFullscreen();fullscreenButton.innerHTML='⛶ <span class="fullscreen-label">Fullscreen</span>'}}catch(e){showToast('Your browser keeps this in-app fullscreen.');}
   });
-  resetButton.addEventListener('click',()=>{round=1;score=0;resetButton.textContent='Start over';prepareRound()});
-  prepareRound();
+  document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)fullscreenButton.innerHTML='⛶ <span class="fullscreen-label">Fullscreen</span>'});
+  hintButton.addEventListener('click',giveHint);
+  nextButton.addEventListener('click',()=>{
+    if(!roundLocked)return;
+    round++;renderScene();
+    const main=overlay.querySelector('.difference-main');if(main)main.scrollTop=0;
+  });
+  // Accessible mobile-friendly hit targets remain keyboard operable.
+  renderScene();
 })();
 </script>
+
+<div class="difference-overlay" id="differenceOverlay" role="dialog" aria-modal="true" aria-labelledby="differenceTitle" aria-hidden="true">
+  <header class="difference-top">
+    <div class="difference-brand"><span class="difference-mark">≠</span><span><strong>The Difference Game</strong><small>thereisfarq / notice what others miss</small></span></div>
+    <div class="difference-controls"><button class="game-icon-btn fullscreen-label" id="fullscreenGame" type="button" title="Toggle browser fullscreen">⛶ <span class="fullscreen-label">Fullscreen</span></button><button class="game-icon-btn close-game" id="closeGame" type="button" aria-label="Close game" title="Close game">×</button></div>
+  </header>
+  <div class="difference-hud" aria-label="Game stats">
+    <div class="hud-item"><small>Round</small><strong id="endlessRound">01</strong></div><span class="hud-divider"></span>
+    <div class="hud-item"><small>Score</small><strong id="endlessScore">0</strong></div><span class="hud-divider"></span>
+    <div class="hud-item"><small>Streak</small><strong class="streak-hot" id="endlessStreak">0×</strong></div><span class="hud-divider"></span>
+    <div class="hud-item"><small>Found</small><strong id="endlessFound">0/5</strong></div><span class="hud-divider"></span>
+    <div class="hud-item"><small>Rounds</small><strong class="hud-infinity">∞</strong></div>
+  </div>
+  <div class="difference-progress" aria-hidden="true"><span id="differenceProgress"></span></div>
+  <main class="difference-main">
+    <div class="difference-prompt"><div><h1 id="differenceTitle">Look closer<span>.</span></h1><p>Find five differences. Tap the right-hand scene wherever something changed.</p></div><div class="difference-status" id="differenceStatus">0 of 5 found</div></div>
+    <div class="scene-pair" id="scenePair"></div>
+    <div class="scene-hint" id="sceneHint" aria-live="polite">Every round is a new composition. <strong>&nbsp;No timer. Just your eye.</strong></div>
+    <div class="difference-bottom"><div class="difference-help">Tap a changed detail on the right image.<br>Keyboard: <span class="kbd">Esc</span> to leave</div><div class="difference-bottom-actions"><button class="game-icon-btn hide-mobile" id="hintDifference" type="button">Give me a hint</button><button class="game-icon-btn primary" id="nextScene" type="button" disabled>Next scene ↗</button></div></div>
+  </main>
+  <div class="round-toast" id="roundToast" role="status">All differences found!</div>
+</div>
 </body>
 </html>
