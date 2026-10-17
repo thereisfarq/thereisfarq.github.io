@@ -73,7 +73,7 @@ body{background:var(--bg);font-family:var(--ui-font)}
 <script>
 (()=> {
 const $=id=>document.getElementById(id), tabs={convert:$('tabConvert'),stems:$('tabStems')}, panels={convert:$('convertPanel'),stems:$('stemsPanel'),how:$('howPanel')};
-let convertSelected=null,stemSelected=null,ffmpeg=null,ffmpegLoading=null,convertBusy=false,stemBusy=false,remoteURL=null; const API_BASE=(window.DECIBEL_API_BASE||"").replace(/\\/$/,"");
+let convertSelected=null,stemSelected=null,ffmpeg=null,ffmpegLoading=null,convertBusy=false,stemBusy=false,remoteURL=null; const rawAPIBase=window.DECIBEL_API_BASE||""; const API_BASE=rawAPIBase.endsWith("/")?rawAPIBase.slice(0,-1):rawAPIBase;
 const prettySize=n=>n<1024?n+' B':n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(1)+' MB';
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function showTab(tab){for(const [key,b] of Object.entries(tabs)){const s=key===tab;b.classList.toggle('active',s);b.setAttribute('aria-selected',String(s));b.tabIndex=s?0:-1;}panels.convert.hidden=tab!=='convert';panels.stems.hidden=tab!=='stems';panels.how.hidden=true;document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('active',a.dataset.tab===tab));if(location.hash!==(tab==='convert'?'#convert':'#stems'))history.replaceState(null,'',tab==='convert'?'#convert':'#stems');}
