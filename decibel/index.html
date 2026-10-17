@@ -212,10 +212,10 @@ $('separateAction').addEventListener('click',async()=>{
    $('stemStatus').textContent='Uploading audio to configured Decibel separator…';
    const fd=new FormData();fd.append('file',stemSelected,stemSelected.name);
    const res=await fetch(API_BASE+'/api/separate',{method:'POST',body:fd});
-   if(!res.ok){let msg='AI separation failed.';try{const data=await res.json();msg=data.detail||msg}catch{}throw new Error(msg);}
+   if(!res.ok){let msg='Audio split failed.'try{const data=await res.json();msg=data.detail||msg}catch{}throw new Error(msg);}
    const blob=await res.blob();if(!blob.size)throw new Error('The AI service returned an empty archive.');
-   const url=URL.createObjectURL(blob);$('stemResult').innerHTML='<div class="file-row"><span class="file-badge">ZIP</span><span class="file-info"><strong>AI-separated stems.zip</strong><small>'+prettySize(blob.size)+' · service-generated stems</small></span><a class="btn btn-primary" href="'+url+'" download="decibel-stems.zip">Download ↓</a></div>';
-   $('stemStatus').textContent='Separation complete · ZIP ready.';return;
+   const url=URL.createObjectURL(blob);$('stemResult').innerHTML='<div class="file-row"><span class="file-badge">ZIP</span><span class="file-info"><strong>Center / side split.zip</strong><small>'+prettySize(blob.size)+' · channel split, not AI vocal separation</small></span><a class="btn btn-primary" href="'+url+'" download="decibel-center-side.zip">Download ↓</a></div>';
+   $('stemStatus').textContent='Center / side split complete · ZIP ready.';return;
   }
   $('stemStatus').textContent='Decoding audio locally…';
   const audio=await decodeAudioFile(stemSelected);
