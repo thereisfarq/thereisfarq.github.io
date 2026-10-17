@@ -59,6 +59,53 @@ body{background:var(--bg);font-family:var(--ui-font)}
 .footer a:hover{color:var(--accent)}
 .step-num{border-color:var(--border);border-radius:6px}
 @media(max-width:640px){.topbar{min-height:60px;padding:8px 16px}.decibel-logo{width:82px;height:28px}.brand{gap:9px}.brand-sub{padding-left:9px;font-size:10px}.status{display:none}.main{padding:24px 18px 32px}.hero{margin-top:4px}.hero h1{font-size:1.65rem}.hero-copy{font-size:.9rem}.input-row{flex-direction:column}.input-row .btn{width:100%}.settings-grid{grid-template-columns:1fr}.action-row{align-items:stretch}.action-row .btn{width:100%}.footer{padding:16px 18px 24px;gap:8px;flex-wrap:wrap}}
+
+/* Morph-aligned layout: centered, single-workspace flow */
+.app{display:flex;flex-direction:column;min-height:100vh;max-width:none;margin:0;border:0;grid-template-columns:none;grid-template-rows:none}
+.topbar{position:sticky;top:0;height:58px;min-height:58px;padding:0 24px;background:var(--bg);border-bottom:1px solid var(--line);z-index:10}
+.brand{gap:10px}.decibel-logo{width:108px!important;height:46px!important;object-fit:contain!important;object-position:left center;filter:none!important}
+.brand-sub{display:none}
+.top-actions{gap:10px}.status{font-size:10px}
+.sidebar{display:none!important}
+.main{display:block;width:min(100%,38rem);margin:0 auto;padding:26px 24px 48px}
+.canvas{width:100%}
+.aside{display:none!important}
+.crumbs{display:none}
+.hero{text-align:center;margin:0 auto 20px;max-width:38rem}
+.eyebrow{margin-bottom:8px}
+.hero h1{font-size:clamp(34px,7vw,48px);line-height:1.02;letter-spacing:-.055em}
+.hero-copy{max-width:34rem;margin:12px auto 0;font-size:13px;line-height:1.6;color:var(--muted)}
+.hero-meta{justify-content:center;margin-top:13px}
+.tabs{display:flex;gap:4px;width:100%;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--shell);margin:22px 0 16px}
+.tab{flex:1;min-width:0;text-align:center;border:1px solid transparent;border-radius:6px;background:transparent;padding:10px 12px;color:var(--muted);font-size:12px;font-weight:600}
+.tab.active{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.work-panel{border:1px solid var(--line);border-radius:8px;background:transparent;overflow:hidden}
+.panel-head{padding:16px 18px;border-bottom:1px solid var(--line);background:var(--shell)}
+.panel-head h2{font-size:14px}.panel-head p{font-size:11px;line-height:1.55}
+.panel-index{display:none}
+.panel-body{padding:18px}
+.text-input,select{border-radius:6px;background:var(--shell)}
+.btn{border-radius:6px}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.btn-primary:hover{background:#f1dadd;color:var(--ink)}
+.file-drop{border-radius:8px;min-height:138px;background:transparent;border-color:var(--border-subtle)}
+.file-drop:hover,.file-drop.dragging{background:#e5c7ca1a;border-color:var(--accent)}
+.upload-glyph{border-radius:7px}
+.notice{border-radius:6px}
+.footer{margin-top:22px}
+@media(max-width:600px){
+ .topbar{padding:0 14px;height:54px;min-height:54px}
+ .decibel-logo{width:94px!important;height:40px!important}
+ .top-link{font-size:10px;padding:7px 9px}
+ .main{padding:20px 14px 34px}
+ .hero h1{font-size:36px}
+ .hero-copy{font-size:12px}
+ .panel-body{padding:14px}
+ .input-row{flex-direction:column}
+ .input-row .btn{width:100%}
+ .settings-grid{grid-template-columns:1fr}
+}
+
 </style></head><body><div class="app">
 <header class="topbar"><a class="brand" href="https://thereisfarq.github.io/" aria-label="Farq Studio toolbox"><img class="decibel-logo" src="decibel-logo.svg" alt="Decibel"><span class="brand-sub">Farq Studio</span></a><div class="top-actions"><span class="status"><i class="dot"></i> Browser-first · no account</span><a class="top-link" href="https://thereisfarq.github.io/">← All tools</a></div></header>
 <aside class="sidebar"><div><div class="side-label">Workspace</div><nav class="nav" aria-label="Decibel tools"><a href="#convert" class="active" data-tab="convert"><span class="nav-icon">⇩</span><span class="nav-text">Convert media</span></a><a href="#stems" data-tab="stems"><span class="nav-icon">≋</span><span class="nav-text">Split stems</span></a><a href="#how" data-tab="how"><span class="nav-icon">i</span><span class="nav-text">How it works</span></a></nav></div><div class="sidebar-bottom"><strong>thereisfarq</strong>Less friction between a sound and what you want to do with it.<br><a href="https://www.thereisfarq.in" target="_blank" rel="noopener noreferrer">Visit the studio ↗</a></div></aside>
