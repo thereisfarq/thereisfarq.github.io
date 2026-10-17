@@ -158,7 +158,14 @@ function safeName(name){return (name.replace(/\.[^.]+$/,'').replace(/[^a-z0-9_-]
 function extension(name){return (name.split('.').pop()||'bin').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,8)||'bin';}
 async function getFFmpeg(){
  if(ffmpeg)return ffmpeg;if(ffmpegLoading)return ffmpegLoading;
- ffmpegLoading=(async()=>{if(!window.FFmpeg||!window.FFmpeg.createFFmpeg)throw new Error('The FFmpeg browser library could not load. Check your internet connection or CDN access and reload.');const engine=window.FFmpeg.createFFmpeg({log:false,corePath:'https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',progress:({ratio})=>{const pct=Math.max(0,Math.min(99,Math.round((ratio||0)*100)));$('convertStatus').textContent='Processing locally… '+pct+'%';}});await engine.load();ffmpeg=engine;return engine;})();
+ ffmpegLoading=(async()=>{
+  if(!window.FFmpeg||!window.FFmpeg.createFFmpeg){
+   await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js';script.onload=resolve;script.onerror=()=>reject(new Error('The browser encoder could not load from either CDN. Check your connection or disable content blockers, then reload.'));document.head.appendChild(script);});
+  }
+  if(!window.FFmpeg||!window.FFmpeg.createFFmpeg)throw new Error('The browser encoder loaded incorrectly. Reload the page and try again.');
+  const engine=window.FFmpeg.createFFmpeg({log:false,corePath:'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',progress:({ratio})=>{const pct=Math.max(0,Math.min(99,Math.round((ratio||0)*100)));$('convertStatus').textContent='Processing locally… '+pct+'%';}});
+  await engine.load();ffmpeg=engine;return engine;
+ })();
  try{return await ffmpegLoading}finally{ffmpegLoading=null}
 }
 function downloadBlob(data,mime,name){const blob=data instanceof Blob?data:new Blob([data],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);return {url,name,size:blob.size};}
