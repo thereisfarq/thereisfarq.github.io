@@ -1,9 +1,10 @@
-import io, os, re, shutil, tempfile, zipfile
+import io, os, re, shutil, tempfile, zipfile, ipaddress, socket
 from pathlib import Path
 from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
+from starlette.background import BackgroundTask
 from pydantic import BaseModel, HttpUrl
 import yt_dlp
 
@@ -25,6 +26,19 @@ def validate_url(raw: str):
     if u.scheme not in ("http", "https") or not u.hostname:
         raise HTTPException(400, "Only public http/https media URLs are supported.")
     host = u.hostname.lower()
+    try:
+        ip = ipaddress.ip_address(host)
+        if not ip.is_global:
+            raise HTTPException(400, "Private or local network addresses are not allowed.")
+    except ValueError:
+        if host in {"localhost", "localhost.localdomain"} or host.endswith(".local"):
+            raise HTTPException(400, "Private or local network addresses are not allowed.")
+        try:
+            resolved = {ipaddress.ip_address(item[4][0]) for item in socket.getaddrinfo(host, None, type=socket.SOCK_STREAM)}
+            if any(not ip.is_global for ip in resolved):
+                raise HTTPException(400, "Private or local network addresses are not allowed.")
+        except socket.gaierror:
+            pass
     if not (host in ALLOWED_HOSTS or host.endswith(".youtube.com") or host.endswith(".vimeo.com")):
         ext = Path(u.path).suffix.lower()
         if ext not in {".mp3", ".wav", ".m4a", ".aac", ".ogg", ".flac", ".mp4", ".webm", ".mov", ".mkv", ".m4v"}:
@@ -82,7 +96,7 @@ def convert(req: ConvertRequest):
             persistent = tempfile.NamedTemporaryFile(delete=False, suffix=output.suffix, prefix="decibel-out-")
             persistent.close()
             shutil.copyfile(output, persistent.name)
-            return FileResponse(persistent.name, filename=safe_name(info_data.get("title") or "decibel") + "." + fmt, media_type={"mp3":"audio/mpeg","wav":"audio/wav","mp4":"video/mp4","webm":"video/webm"}[fmt])
+            return FileResponse(persistent.name, filename=safe_name(info_data.get("title") or "decibel") + "." + fmt, media_type={"mp3":"audio/mpeg","wav":"audio/wav","mp4":"video/mp4","webm":"video/webm"}[fmt], background=BackgroundTask(os.unlink, persistent.name))
         except HTTPException:
             raise
         except Exception as exc:
